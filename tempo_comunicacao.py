@@ -27,7 +27,7 @@ def tempo_visada(dataframe, coordenadas_alvo: list, angulo_elevacao: float, incl
     :param inclinacao: float(Orbit inclination)
     :return: pandas.Dataframe with all communication time between a target and a satellite
     """
-    import numpy as np
+   """ import numpy as np """
     import pandas as pd
     import Periodo_Orbital as PO
     from tqdm import tqdm
