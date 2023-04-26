@@ -281,7 +281,7 @@ if __name__ == '__main__':
     import os, sys
     input_string = ' 11/10/2022 18:00:00'
     data = datetime.strptime(input_string, " %m/%d/%Y %H:%M:%S")
-    df = propagador_orbital(data, 6800.0, 0.002, 0.0, 0.0, 0.0, 52, 20, 10, 3.0, 0.1, 0.1, 0.2) #(data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira,
+    df = propagador_orbital(data, 7000.0, 0.002, 0.0, 0.0, 0.0, 52, 50, 10, 3.0, 0.1, 0.1, 0.2) #(data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira,
                                                 # inclinacao, num_orbitas, delt, massa, largura, comprimento, altura)
     from Plots import plot_groundtrack_3D as plt3d
 
