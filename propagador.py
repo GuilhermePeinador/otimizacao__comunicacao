@@ -4,12 +4,10 @@
     Universidade Federal de Santa Catarina
     Laboratory of Applications and Research in Space - LARS
     Orbital Mechanics Division
-
     Título do Algoritmo = Codigo principal de propagacao orbital e analise termica
     Autor= Rodrigo S. Cardozo
     Versão = 0.1.0
     Data = 05/04/2023
-
 """
 
 
@@ -27,6 +25,12 @@ def propagador_orbital(data: str, semi_eixo: float, excentricidade: float, raan:
     :param inclinacao = inclinacao da orbita
     :param num_orbitas = numero de orbitas a serem simuladas
     :param delt = Time step for the integration
+    :param psi = primeiro angulo de Euler
+    :param teta = segundo angulo de Euler
+    :param phi = terceiro angulo de Euler
+    :param psip = velocidade angular do primeiro angulo de Euler
+    :param tetap = velocidade angular do segundo angulo de Euler
+    :param phip = velocidade angular do terceiro angulo de Euler
     :param massa = massa do cubesat
     :param largura = largura do cubsat
     :param comprimento = comprimento do cubesat
@@ -57,6 +61,9 @@ def propagador_orbital(data: str, semi_eixo: float, excentricidade: float, raan:
         a = (largura)  # comprimento do sat
         b = (comprimento)  # largura do sat
         c = (altura)  # altura do sat
+        Ix3 = (m / 12) * (b ** 2 + c ** 2)  # momento de inercia na direcao x
+        Iy3 = (m / 12) * (a ** 2 + c ** 2)  # momento de inercia na direcao y
+        Iz3 = (m / 12) * (a ** 2 + b ** 2)  # momento de inercia na direcao z
 
         # Condicoes inicial do propagador
         h, ecc, anomalia_verdadeira, raan, inc, arg_per = q
@@ -88,7 +95,6 @@ def propagador_orbital(data: str, semi_eixo: float, excentricidade: float, raan:
     # Funcao para calcular a densidade atmosferica ao longo da orbita
     def densidade(data, altitude, latitude, longitude):
         """
-
         :param data: mes/dia/ano hora:minu:sec
         :param altitude: altitude da orbita
         :param latitude: latitude
@@ -114,17 +120,11 @@ def propagador_orbital(data: str, semi_eixo: float, excentricidade: float, raan:
     R_terra = 6371.0 # raio da terra
     h0 = np.sqrt(semi_eixo*mu*(1 - excentricidade**2)) # momento linear do satelite
 
-
-    # parametros para integracao dos quaternions
-
-
     # Matriz de rotacao
     '''x_rot = np.cos(np.radians(argumento_perigeu)) * np.cos(np.radians(raan)) - np.cos(np.radians(inclinacao)) \
             * np.sin(np.radians(argumento_perigeu)) * np.sin(np.radians(raan))
-
     y_rot = np.cos(np.radians(argumento_perigeu)) * np.sin(np.radians(raan)) + np.cos(np.radians(inclinacao))\
             * np.sin(np.radians(argumento_perigeu)) * np.cos(np.radians(raan))
-
     z_rot = np.sin(np.radians(inclinacao)) * np.sin(np.radians(argumento_perigeu))'''
 
     phi = np.radians(raan)
@@ -153,13 +153,10 @@ def propagador_orbital(data: str, semi_eixo: float, excentricidade: float, raan:
     print(f'longitude0: {longitude0}')
     '''import pyproj
     input_proj = pyproj.CRS.from_epsg(4328)
-
     # Define o sistema de coordenadas de saída (geográfico)
     output_proj = pyproj.CRS.from_epsg(4326)
-
     # Cria um objeto Transformer para realizar a transformação de coordenadas
     transformer = pyproj.transformer.Transformer.from_crs(input_proj, output_proj)
-
     # Converte as coordenadas do sistema de coordenadas geocêntricas para o sistema de coordenadas geográficas
     longitude0, latitude0, alt = transformer.transform(b[0] * 1000.0, b[1] * 1000.0, b[2] * 1000.0, radians=True)'''
 
@@ -183,7 +180,6 @@ def propagador_orbital(data: str, semi_eixo: float, excentricidade: float, raan:
     time_simu = [0]
     cont = 0
     r = []
-    v = []
     #while cont < T:
     from tqdm import tqdm
     for i in  tqdm(range(0,int(T)+1, int(delt)), colour='#9803fc'):
@@ -194,7 +190,6 @@ def propagador_orbital(data: str, semi_eixo: float, excentricidade: float, raan:
         posicao = (h0**2/mu)*(1/(1-ecc0*np.cos(true_anomaly0)))
         air_density = densidade(ini_date, altitude, latitude, longitude)
         velocidade = (mu/h0)*np.sqrt(np.sin(true_anomaly0)**2 + (ecc0 + np.cos(true_anomaly0))**2)*1000.0
-        v.append(velocidade/1000.0)
         massa = massa
         CD = 2.2
         Area_transversal = 0.1*0.1
@@ -229,11 +224,9 @@ def propagador_orbital(data: str, semi_eixo: float, excentricidade: float, raan:
         '''X_ECEF = ((np.cos(lamb_e) * np.cos(arg_per0) - np.sin(lamb_e) * np.sin(arg_per0) * np.cos(inc0)) * xp
                  + (-np.cos(lamb_e) * np.sin(arg_per0) - np.sin(lamb_e) * np.cos(inc0) * np.cos(arg_per0)) * yp
                  + np.sin(lamb_e) * np.sin(inc0) * zp)
-
         Y_ECEF = ((np.sin(lamb_e) * np.cos(arg_per0) + np.cos(lamb_e) * np.cos(inc0) * np.sin(arg_per0)) * xp
                  + (-np.sin(lamb_e) * np.sin(arg_per0) + np.cos(lamb_e) * np.cos(inc0) * np.cos(arg_per0)) * yp
                  - np.cos(lamb_e) * np.sin(inc0) * zp)
-
         Z_ECEF = (np.sin(inc0) * np.sin(arg_per0) * xp
                  + np.sin(inc0) * np.cos(arg_per0) * yp
                  + np.cos(inc0) * zp)'''
@@ -252,14 +245,27 @@ def propagador_orbital(data: str, semi_eixo: float, excentricidade: float, raan:
         R_ECEF = np.dot(np.transpose(Q_rot), r_p)
         r.append(np.array(R_ECEF))
 
+        latitude = ((np.arcsin(R_ECEF[2]/np.linalg.norm(R_ECEF))))
+
+        longitude = ((np.arctan2(R_ECEF[1],R_ECEF[0])))
+
+        '''import pyproj
+        input_proj = pyproj.CRS.from_epsg(4328)
+        # Define o sistema de coordenadas de saída (geográfico)
+        output_proj = pyproj.CRS.from_epsg(4326)
+        # Cria um objeto Transformer para realizar a transformação de coordenadas
+        transformer = pyproj.transformer.Transformer.from_crs(input_proj, output_proj)
+        # Converte as coordenadas do sistema de coordenadas geocêntricas para o sistema de coordenadas geográficas
+        longitude, latitude, alt = transformer.transform(X_ECEF*1000.0, Y_ECEF*1000.0, Z_ECEF*1000.0, radians=True)'''
+
+        lat.append(np.degrees(latitude))
+        long.append(np.degrees(longitude))
     import os.path
     r = pd.DataFrame(r, columns=['rx', 'ry', 'rz'])
-    df3 = pd.DataFrame(data, columns=['Data'])
-    r = pd.concat([r, df3], axis=1)
-
-    df4 = pd.DataFrame(time_simu, columns=['Tempo'])
-    r = pd.concat([r, df4], axis=1)
-    r['end'] = None
+    r['latitude'] = np.degrees(np.arcsin(r['rz'] / (r['rx']**2 + r['ry']**2 + r['rz']**2)**0.5))
+    r['longitude'] = np.degrees(np.arctan2(r['ry'], r['rx']))
+    r['r'] = np.sqrt(r['rx']**2 + r['ry']**2 + r['rz']**2)
+    r['end'] = 'end'
     r.to_csv(os.path.join('./results/', 'ECEF_R.csv'), sep=',')
 
     return r
@@ -275,8 +281,9 @@ if __name__ == '__main__':
     import os, sys
     input_string = ' 11/10/2022 18:00:00'
     data = datetime.strptime(input_string, " %m/%d/%Y %H:%M:%S")
-    df = propagador_orbital(data, 6800.0, 0.002, 0.0, 0.0, 0.0, 52, 1, 10, 3.0, 0.1, 0.1, 0.2) #(data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira,
+    df = propagador_orbital(data, 6800.0, 0.002, 0.0, 0.0, 0.0, 52, 20, 10, 3.0, 0.1, 0.1, 0.2) #(data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira,
                                                 # inclinacao, num_orbitas, delt, massa, largura, comprimento, altura)
     from Plots import plot_groundtrack_3D as plt3d
 
-    #plt3d(df)
+    plt3d(df)
+    print(df)

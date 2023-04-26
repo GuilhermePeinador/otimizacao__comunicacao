@@ -18,7 +18,7 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 df = pd.read_csv(resource_path("data\posicao_tempo2.csv"), sep=',', engine='python', on_bad_lines='skip')
-
+''''''
 def tempo_visada(dataframe, coordenadas_alvo: list, angulo_elevacao: float, inclinacao: float):
     """
     :param dataframe: pandas.Dataframe
