@@ -21,32 +21,35 @@ df = pd.read_csv(resource_path("results\ECEF_R.csv"), sep=',', engine='python', 
 Contato =[]
 #df=dataframe
 
-for i in tqdm (range (df[df.columns[0]].count())):
-    lat_gs = np.radians(-5.871778)
-    long_gs = np.radians(-35.206864)
-    R_E = 6371.00  # raio da Terra em km
+#todo def
+def calculacomunicacao(df):
 
-    VetorTerraEstacao = np.array([R_E * np.cos(lat_gs) * np.cos(long_gs), R_E * np.cos(lat_gs) * np.sin(long_gs), R_E * np.sin(lat_gs)])
-    VetorSatelite = np.array([df.iloc[i, df.columns.get_loc('rx')], df.iloc[i, df.columns.get_loc('ry')], df.iloc[i, df.columns.get_loc('rz')]])
+    for i in tqdm (range (df[df.columns[0]].count())):
+        lat_gs = np.radians(-5.871778)
+        long_gs = np.radians(-35.206864)
+        R_E = 6371.00  # raio da Terra em km
 
-    VetorSateliteEstacao = VetorSatelite - VetorTerraEstacao
+        VetorTerraEstacao = np.array([R_E * np.cos(lat_gs) * np.cos(long_gs), R_E * np.cos(lat_gs) * np.sin(long_gs), R_E * np.sin(lat_gs)])
+        VetorSatelite = np.array([df.iloc[i, df.columns.get_loc('rx')], df.iloc[i, df.columns.get_loc('ry')], df.iloc[i, df.columns.get_loc('rz')]])
 
-    #Critério de Comunicação
-    AComunicacao = np.pi \
-            - np.arccos((np.dot(VetorSatelite,VetorSateliteEstacao))/(np.linalg.norm(VetorSatelite)*np.linalg.norm(VetorSateliteEstacao))) \
-            - np.arccos((np.dot(VetorTerraEstacao,VetorSatelite))/(np.linalg.norm(VetorTerraEstacao)*np.linalg.norm(VetorSatelite)))
+        VetorSateliteEstacao = VetorSatelite - VetorTerraEstacao
+
+        #Critério de Comunicação
+        AComunicacao = np.pi \
+                - np.arccos((np.dot(VetorSatelite,VetorSateliteEstacao))/(np.linalg.norm(VetorSatelite)*np.linalg.norm(VetorSateliteEstacao))) \
+                - np.arccos((np.dot(VetorTerraEstacao,VetorSatelite))/(np.linalg.norm(VetorTerraEstacao)*np.linalg.norm(VetorSatelite)))
 
 
-    if AComunicacao >= np.radians(105): #90 graus (horizonte) + 15 (elevação)
-        Contato.append(1)
-        #print("1") #Tem comunicação
-    else:
-        Contato.append(0)
-        #print("0") # não tem comunicação
+        if AComunicacao >= np.radians(105): #90 graus (horizonte) + 15 (elevação)
+            Contato.append(1)
+            #print("1") #Tem comunicação
+        else:
+            Contato.append(0)
+            #print("0") # não tem comunicação
 
-df6 = pd.DataFrame(Contato, columns=['Contato'])
-df = pd.concat([df,df6], axis=1)
-df["end"] = None
-df.to_csv("Tempo de comunicação.csv", sep=',')
-print (df)
-
+    df6 = pd.DataFrame(Contato, columns=['Contato'])
+    df = pd.concat([df,df6], axis=1)
+    df["end"] = None
+    df.to_csv("Tempo de comunicação.csv", sep=',')
+    print (df)
+    return df

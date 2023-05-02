@@ -1,4 +1,6 @@
 #plots.py>
+import numpy as np
+
 
 # plotagens orbitais #
 def plot_animacao_orbita(dataframe, size, numero_divisoes):
@@ -35,15 +37,23 @@ def plot_groundtrack_3D(dataframe):
 
     fig = go.Figure()
 
-
     fig.add_trace(go.Scattergeo(
         lon=df['longitude'],
         lat=df['latitude'],
         mode='lines',
-        line=dict(width=2, color='rgb(213,62,79)'
-                      ),
+        line=dict(width=2, color='rgb(213,62,79)'),
         connectgaps=False)
         )
+    # Desenha o ponto referente a antena
+    fig.add_trace(go.Scattergeo(
+        lon=[-35.206864],
+        lat=[-5.871778],
+        mode='markers',
+        line=dict(width=10, color='rgb(252,186,3)'),
+        connectgaps=False)
+        )
+
+    fig.update_traces(marker=dict(size=15))
 
     fig.update_layout(
         title_text='Contour lines over globe<br>(Click and drag to rotate)',
