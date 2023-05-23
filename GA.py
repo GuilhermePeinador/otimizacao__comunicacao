@@ -1,32 +1,59 @@
 from propagador import propagador_orbital
 from Periodo_Orbital import periodo_orbital
 from comunicacao import calculacomunicacao
+import pygad
+from datetime import datetime
 
+'''def Fitness(x):
 
+    Rann = x[0]
+    Inclinacao = x[1]
+    Elevacao = x[2] + 6378
 
-def Calc_Coefs(k, i, tc):
-    df = propagador_orbital(data, 7000.0, 0.002, k, 0.0, 0.0, i, 10, 10, 3.0, 0.1, 0.1, 0.2)
-    # (data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira, inclinacao, num_orbitas, delt, massa, largura, comprimento, altura)
+    dt = 10
 
+    input_string = ' 11/10/2022 18:00:00'
+    data = datetime.strptime(input_string, " %m/%d/%Y %H:%M:%S")
+    df = propagador_orbital(data, Elevacao, 0.002, Raan, 0.0, 0.0, Inclinacao, NOrb, dt, 3.0, 0.1, 0.1, 0.2) #(data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira,
+                                                # inclinacao, num_orbitas, delt, massa, largura, comprimento, altura)
+
+    from comunicacao import CalculaComuni
+    df2 = CalculaComuni(df)
+
+    df2 = df2[0:-1]
+    index = df2["Contato"].tolist()
+    Tempo = df2["Tempo"].tolist()
+
+    tempo_comunicacao_simulacao = index.count(1)
+    tempo_comunicacao_total = tempo_comunicacao_simulacao*dt
+    tempo_voo = len(index)*dt
+
+    return tempo_comunicacao_total/tempo_voo'''
+
+def fitness_func(solution, solution_idx):
+    raan  = solution[0] #Raan
+    inc  = solution[1]  #Inclinação
+    alt = solution[2]   #SMA
+
+    dt = 10
+
+    input_string = ' 11/10/2022 18:00:00'
+    data = datetime.strptime(input_string, " %m/%d/%Y %H:%M:%S")
+    df = propagador_orbital(data, alt, 0.002, raan, 0.0, 0.0, inc, 10, dt, 3.0, 0.1, 0.1,
+                            0.2)  # (data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira,
+                                    # inclinacao, num_orbitas, delt, massa, largura, comprimento, altura)
+
+    from comunicacao import calculacomunicacao
     df2 = calculacomunicacao(df)
+
     df2 = df2[0:-1]
     index = df2["Contato"].tolist()
 
     tempo_comunicacao_simulacao = index.count(1)
-    tempo_comunicacao_total = tempo_comunicacao_simulacao * 10
+    tempo_comunicacao_total = tempo_comunicacao_simulacao * dt
+    tempo_voo = len(index) * dt
 
-    return
-
-
-def fitness_func(solution, solution_idx):
-    k  = solution[0] #Raan
-    i  = solution[1] #Inclinação
-    tc = solution[2] #Tempo de comunicação
-
-     = Calc_Coefs(k, i, tc)
-
-
-    return  # GA maximiza
+    return  tempo_comunicacao_total/tempo_voo # GA maximiza
 
 
 last_fitness = 0
@@ -39,15 +66,15 @@ def on_generation(ga_instance):
     last_fitness = ga_instance.best_solution(pop_fitness=ga_instance.last_generation_fitness)[1]
 
 
-ga_instance = pygad.GA(num_generations=70,
-                       num_parents_mating=30,
+ga_instance = pygad.GA(num_generations=5,
+                       num_parents_mating=3,
                        fitness_func=fitness_func,
-                       sol_per_pop=50,
-                       num_genes=2,
-                       gene_space=[{"low": 0, "high": 0.3}, {"low": 0.05, "high": 2.}],
+                       sol_per_pop=5,
+                       num_genes=3,
+                       gene_space=[{"low": 0, "high": 360} , [30, 50, 98] , {"low":6778, "high": 8000}],
+                       mutation_percent_genes= 70,
                        mutation_by_replacement=True,
-                       on_generation=on_generation,
-                       save_solutions=True)
+                       on_generation=on_generation )
 
 ga_instance.run()
 #ga_instance.plot_fitness()

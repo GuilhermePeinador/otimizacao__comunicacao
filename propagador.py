@@ -301,4 +301,4 @@ if __name__ == '__main__':
 
     tempo_comunicacao_simulacao = index.count(1)
     tempo_comunicacao_total = tempo_comunicacao_simulacao*10
-    print(f'Tempo de comunicação (em segundos): {tempo_comunicacao_total}')
+    #print(f'Tempo de comunicação (em segundos): {tempo_comunicacao_total}')
