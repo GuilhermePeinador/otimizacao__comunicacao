@@ -1,3 +1,18 @@
+'''
+
+##          ###    ########   ######
+##         ## ##   ##     ## ##    ##
+##        ##   ##  ##     ## ##             Universidade Federal de Santa Catarina
+##       ##     ## ########   ######        Laboratory of Applications and Research in Space
+##       ######### ##   ##         ##       Orbital Mechanics Division
+##       ##     ## ##    ##  ##    ##
+######## ##     ## ##     ##  ######
+
+Título do Algoritmo: Algoritmo Genético acoplado ao propagador orbital
+Autor: Guilherme Peinador Gomes
+
+'''
+
 from propagador import propagador_orbital
 from Periodo_Orbital import periodo_orbital
 from comunicacao import calculacomunicacao
@@ -5,15 +20,15 @@ import pygad
 from datetime import datetime
 
 def fitness_func(solution, solution_idx):
-    raan  = solution[0] #Raan
-    inc  = solution[1]  #Inclinação
-    alt = solution[2]   #SMA
+    #raan  = solution[0] #Raan
+    inc  = solution[0]  #Inclinação
+    #alt = solution[1]   #SMA
 
     dt = 10
 
     input_string = ' 11/10/2022 18:00:00'
     data = datetime.strptime(input_string, " %m/%d/%Y %H:%M:%S")
-    df = propagador_orbital(data, alt, 0.002, raan, 0.0, 0.0, inc, 10, dt, 3.0, 0.1, 0.1,
+    df = propagador_orbital(data, 7000, 0.002, 0, 0.0, 0.0, inc, 40, dt, 3.0, 0.1, 0.1,
                             0.2)  # (data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira,
                                     # inclinacao, num_orbitas, delt, massa, largura, comprimento, altura)
 
@@ -44,16 +59,17 @@ ga_instance = pygad.GA(num_generations=10,
                        num_parents_mating=5,
                        fitness_func=fitness_func,
                        sol_per_pop=10,
-                       num_genes=3,
-                       gene_space=[{"low": 0, "high": 360} , {"low": 90, "high": 100} , {"low":6878, "high": 6978}], #[30, 50, 98]
-                       mutation_type="adaptive",
-                       mutation_probability= [0.5, 0.1],
+                       num_genes=1,
+                       gene_space=[ {"low": 30, "high": 100} ],  #[30, 50, 98] {"low":6878, "high": 6978}] {"low": 0, "high": 360}
+                       mutation_type="random",
+                       mutation_percent_genes=100,
+                       mutation_by_replacement=True,
                        on_generation=on_generation )
 
 ga_instance.run()
-#ga_instance.plot_fitness()
-#ga_instance.plot_genes(graph_type="boxplot")
-#ga_instance.plot_genes(graph_type="histogram", solutions='all')
+ga_instance.plot_fitness()
+ga_instance.plot_genes(graph_type="boxplot")
+ga_instance.plot_genes(graph_type="histogram", solutions='all')
 
 solution, solution_fitness, solution_idx = ga_instance.best_solution(ga_instance.last_generation_fitness)
 
