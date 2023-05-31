@@ -22,14 +22,13 @@ from datetime import datetime
 def fitness_func(solution, solution_idx):
     #raan  = solution[0] #Raan
     inc  = solution[0]  #Inclinação
-    #alt = solution[1]   #SMA
+    #alt = solution[2]   #SMA
 
     dt = 10
 
     input_string = ' 11/10/2022 18:00:00'
     data = datetime.strptime(input_string, " %m/%d/%Y %H:%M:%S")
-    df = propagador_orbital(data, 7000, 0.002, 0, 0.0, 0.0, inc, 40, dt, 3.0, 0.1, 0.1,
-                            0.2)  # (data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira,
+    df = propagador_orbital(data, 7000, 0.002, 0, 0.0, 0.0, inc, 50, dt, 3.0, 0.1, 0.1, 0.2)  # (data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira,
                                     # inclinacao, num_orbitas, delt, massa, largura, comprimento, altura)
 
     from comunicacao import calculacomunicacao
@@ -55,20 +54,21 @@ def on_generation(ga_instance):
     last_fitness = ga_instance.best_solution(pop_fitness=ga_instance.last_generation_fitness)[1]
 
 
-ga_instance = pygad.GA(num_generations=10,
-                       num_parents_mating=5,
+ga_instance = pygad.GA(num_generations=15,
+                       num_parents_mating=10,
                        fitness_func=fitness_func,
-                       sol_per_pop=10,
+                       sol_per_pop=15,
                        num_genes=1,
-                       gene_space=[ {"low": 30, "high": 100} ],  #[30, 50, 98] {"low":6878, "high": 6978}] {"low": 0, "high": 360}
+                       gene_space=[{"low": 30, "high": 100}], #{"low": 0, "high": 360}, , {"low":6878, "high": 6978}
                        mutation_type="random",
                        mutation_percent_genes=100,
                        mutation_by_replacement=True,
-                       on_generation=on_generation )
+                       save_solutions=True,
+                       on_generation=on_generation)
 
 ga_instance.run()
 ga_instance.plot_fitness()
-ga_instance.plot_genes(graph_type="boxplot")
+#ga_instance.plot_genes(graph_type="boxplot")
 ga_instance.plot_genes(graph_type="histogram", solutions='all')
 
 solution, solution_fitness, solution_idx = ga_instance.best_solution(ga_instance.last_generation_fitness)
