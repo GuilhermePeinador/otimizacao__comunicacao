@@ -1,3 +1,13 @@
+"""
+    Universidade Federal de Santa Catarina
+    Laboratory of Applications and Research in Space - LARS
+    Orbital Mechanics Division
+    Título do Algoritmo = Código de cálculo de comunicação
+    Autor= Guilherme Peinador Gomes
+    Versão = 0.1.0
+    Data = 13/06/2023
+"""
+
 import numpy as np
 import pandas as pd
 import os, sys
