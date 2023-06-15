@@ -28,13 +28,13 @@ def resource_path(relative_path):
 df = pd.read_csv(resource_path("results\ECEF_R.csv"), sep=',', engine='python', on_bad_lines='skip')
 
 #posicao_gs = [R_E * np.cos(lat_gs) * np.cos(long_gs), R_E * np.cos(lat_gs) * np.sin(long_gs), R_E * np.sin(lat_gs)]
-Contato =[]
+
 #df=dataframe
 
 #todo def
 def calculacomunicacao(df):
-
-    for i in tqdm (range (df[df.columns[0]].count())):
+    Contato = []
+    for i in range (df[df.columns[0]].count()):
         lat_gs = np.radians(-5.871778)
         long_gs = np.radians(-35.206864)
         R_E = 6371.00  # raio da Terra em km
@@ -61,5 +61,5 @@ def calculacomunicacao(df):
     df = pd.concat([df,df6], axis=1)
     df["end"] = None
     df.to_csv("Tempo de comunicação.csv", sep=',')
-    print (df)
+    #print (df)
     return df

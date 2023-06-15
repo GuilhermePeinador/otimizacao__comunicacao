@@ -143,14 +143,14 @@ def propagador_orbital(data: str, semi_eixo: float, excentricidade: float, raan:
 
     ano = [np.cos(np.radians(anomalia_verdadeira)), np.sin(np.radians(anomalia_verdadeira)), 0]
     r = [((h1**2/mu)*1/(1 + excentricidade*np.cos(np.radians(anomalia_verdadeira)))) * a for a in ano]
-    print(r)
+    #print(r)
     Posi_ini = np.dot(np.transpose(Q_rot), r)
-    print(Posi_ini)
+    #print(Posi_ini)
     lamb_e = raan0 # (np.arctan2(Posi_ini[1], Posi_ini[0]))
     latitude0 = np.degrees((np.arcsin(Posi_ini[2] / np.linalg.norm(Posi_ini))))
     longitude0 = np.degrees((np.arctan2(Posi_ini[1], Posi_ini[0])))
-    print(f'latitude0: {latitude0}')
-    print(f'longitude0: {longitude0}')
+    #print(f'latitude0: {latitude0}')
+    #print(f'longitude0: {longitude0}')
     '''import pyproj
     input_proj = pyproj.CRS.from_epsg(4328)
     # Define o sistema de coordenadas de saída (geográfico)
@@ -181,8 +181,8 @@ def propagador_orbital(data: str, semi_eixo: float, excentricidade: float, raan:
     cont = 0
     r = []
     #while cont < T:
-    from tqdm import tqdm
-    for i in  tqdm(range(0,int(T)+1, int(delt)), colour='#9803fc'):
+
+    for i in range(0,int(T)+1, int(delt)):
         qi = [h0, ecc0, true_anomaly0, raan0, inc0, arg_per0]
         altitude = rp0 - R_terra
         latitude = lat[-1]
@@ -283,22 +283,24 @@ if __name__ == '__main__':
     import os, sys
     input_string = ' 11/10/2022 18:00:00'
     data = datetime.strptime(input_string, " %m/%d/%Y %H:%M:%S")
-    df = propagador_orbital(data, 7000.0, 0.002, 0.0, 0.0, 0.0, 98, 10, 10, 3.0, 0.1, 0.1, 0.2)
+    df = propagador_orbital(data, 7000.0, 0.002, 0.0, 0.0, 0.0, 38.59117669, 50, 10, 3.0, 0.1, 0.1, 0.2)
     #(data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira, inclinacao, num_orbitas, delt, massa, largura, comprimento, altura)
 
-    from Plots import plot_groundtrack_3D as plt3d
 
-    plt3d(df)
-    print(df)
+    from Plots import *
+    #plt3d(df)
+    #plot_groundtrack_2D(df)
+    #print(df)
 
     from comunicacao import calculacomunicacao
-
     df2 = calculacomunicacao(df)
 
     df2 = df2[0:-1]
     index = df2["Contato"].tolist()
-    Tempo = df2["Data"].tolist()
 
     tempo_comunicacao_simulacao = index.count(1)
     tempo_comunicacao_total = tempo_comunicacao_simulacao*10
-    #print(f'Tempo de comunicação (em segundos): {tempo_comunicacao_total}')
+    tempo_voo = len(index) * 10
+
+    print(f'Tempo de comunicação (em segundos): {tempo_comunicacao_total}')
+    print(f'Fitness:{tempo_comunicacao_total/tempo_voo}')
