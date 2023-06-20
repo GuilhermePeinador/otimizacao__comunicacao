@@ -283,7 +283,7 @@ if __name__ == '__main__':
     import os, sys
     input_string = ' 11/10/2022 18:00:00'
     data = datetime.strptime(input_string, " %m/%d/%Y %H:%M:%S")
-    df = propagador_orbital(data, 7000.0, 0.002, 0.0, 0.0, 0.0, 38.59117669, 50, 10, 3.0, 0.1, 0.1, 0.2)
+    df = propagador_orbital(data, 7000.0, 0.002, 0.0, 0.0, 0.0, 58.45730013, 300, 10, 3.0, 0.1, 0.1, 0.2)
     #(data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira, inclinacao, num_orbitas, delt, massa, largura, comprimento, altura)
 
 
@@ -302,5 +302,5 @@ if __name__ == '__main__':
     tempo_comunicacao_total = tempo_comunicacao_simulacao*10
     tempo_voo = len(index) * 10
 
-    print(f'Tempo de comunicação (em segundos): {tempo_comunicacao_total}')
-    print(f'Fitness:{tempo_comunicacao_total/tempo_voo}')
+    #print(f'Tempo de comunicação (em segundos): {tempo_comunicacao_total}')
+    #print(f'Fitness:{tempo_comunicacao_total/tempo_voo}')

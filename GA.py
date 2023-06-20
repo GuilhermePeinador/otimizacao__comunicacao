@@ -2,7 +2,7 @@
 
 ##          ###    ########   ######
 ##         ## ##   ##     ## ##    ##
-##        ##   ##  ##     ## ##             Universidade Federal de Santa Catarina
+##        ##   ##  ##     ## ##             Federal University de Santa Catarina
 ##       ##     ## ########   ######        Laboratory of Applications and Research in Space
 ##       ######### ##   ##         ##       Orbital Mechanics Division
 ##       ##     ## ##    ##  ##    ##
@@ -21,8 +21,8 @@ from datetime import datetime
 
 def fitness_func(ga_instance, solution, solution_idx):
     #raan  = solution[0] #Raan
-    #inc  = solution[0]  #Inclinação
-    alt = solution[0]   #SMA
+    inc  = solution[0]  #Inclinação
+    alt = solution[1]   #SMA
 
     dt = 10
 
@@ -43,6 +43,8 @@ def fitness_func(ga_instance, solution, solution_idx):
 
     print("teste ", solution," fitness ", tempo_comunicacao_total/tempo_voo)
 
+    del df
+
     return  tempo_comunicacao_total/tempo_voo # GA maximiza
 
 
@@ -56,12 +58,13 @@ def on_generation(ga_instance):
     last_fitness = ga_instance.best_solution(pop_fitness=ga_instance.last_generation_fitness)[1]
 
 
-ga_instance = pygad.GA(num_generations=10,
-                       num_parents_mating=3,
+ga_instance = pygad.GA(num_generations=5,
+                       num_parents_mating=5,
                        fitness_func=fitness_func,
-                       sol_per_pop=20,
+                       sol_per_pop=5,
+                       keep_elitism=3,
                        num_genes=1,
-                       gene_space=[{"low":6878, "high": 6978}], #{"low": 0, "high": 360},{"low": 0, "high": 180} ,
+                       gene_space=[{"low": 30, "high": 110}],                           #{"low": 0, "high": 360},,{"low":6878, "high": 6978},
                        mutation_type="random",
                        mutation_percent_genes=100,
                        mutation_by_replacement=True,
@@ -75,11 +78,10 @@ solution, solution_fitness, solution_idx = ga_instance.best_solution(ga_instance
 print("Solution", solution)
 print(f"Fitness value of the best solution = {solution_fitness}".format(solution_fitness=solution_fitness))
 
-#filename = 'genetic'
-#ga_instance.save(filename=filename)
+filename = '50 órbitas 30-100, 6878-6978'
+ga_instance.save(filename=filename)
 
-#ga_instance.plot_genes(graph_type="plot")
-#ga_instance.plot_genes(plot_type="scatter")
+ga_instance.plot_genes(plot_type="scatter")
 #ga_instance.plot_genes(graph_type="boxplot")
-#ga_instance.plot_genes(graph_type="histogram", solutions='all')
-#ga_instance.plot_new_solution_rate(plot_type="scatter")
+ga_instance.plot_genes(graph_type="histogram")
+ga_instance.plot_new_solution_rate(plot_type="scatter")
