@@ -346,9 +346,6 @@ dfbest9 = pd.DataFrame(best2, columns=['Caso9'])
 dfbest = pd.concat([dfbest, dfbest9], axis=1)
 dfbest10 = pd.DataFrame(best2, columns=['Caso10'])
 dfbest = pd.concat([dfbest, dfbest10], axis=1)
-# print(dfbest)
-# Teste = (dfbest['Caso1'].iloc[-1], dfbest['Caso2'].iloc[-1], dfbest['Caso3'].iloc[-1], dfbest['Caso4'].iloc[-1], dfbest['Caso5'].iloc[-1], dfbest['Caso6'].iloc[-1], dfbest['Caso7'].iloc[-1], dfbest['Caso8'].iloc[-1], dfbest['Caso9'].iloc[-1], dfbest['Caso10'].iloc[-1] )
-# print(np.mean(Teste))
 
 '''Criando Dataframe Min'''
 
@@ -418,9 +415,10 @@ dfstd = pd.concat([dfstd, dfstd9], axis=1)
 dfstd10 = pd.DataFrame(std10, columns=['Caso10'])
 dfstd = pd.concat([dfstd, dfstd10], axis=1)
 
-# print(dfstd)
 
-''' Plots '''
+''' GRÁFICOS '''
+''' Plot Scatter Raan x Fitness '''
+
 '''
 plt.scatter(Rsat2_1, FitTot_1, marker='.')
 plt.scatter(Rsat2_2, FitTot_2, marker='.')
@@ -438,23 +436,68 @@ plt.ylabel('Fitness')
 plt.show()
 '''
 
-dfbest.plot(figsize=(5, 20), title='Best Solution')
-print(best1[0])
-print(dfbest)
-print(np.mean([best1[0], best2[0], best3[0], best4[0], best5[0], best6[0], best7[0], best8[0], best9[0], best10[0]]))
-print(dfbest.mean(axis=1))
+''' Plot BEST SOLUTION Média por Geração e Desvio Padrão por Geração '''
 
+dfmeanbest = pd.DataFrame(dfbest.mean(axis=1), columns=['Média_por_Geração'])
+dfbest = pd.concat([dfbest, dfmeanbest], axis=1)
+dfstdbest = pd.DataFrame(dfbest.std(axis=1), columns=['Desvio_Padrão_por_Geração'])
+dfbest = pd.concat([dfbest, dfstdbest], axis=1)
 
-'''dfbestT = dfbest.transpose()
-print(dfbestT)
+print(dfbest.to_markdown())
+fig = plt.figure()
+x = dfbest.index
+y = dfbest["Média_por_Geração"].tolist()
+yerr = dfbest["Desvio_Padrão_por_Geração"].tolist()
+plt.grid()
+plt.errorbar(x, y, yerr=yerr)
+plt.show()
 
-mean = dfbestT['0'].mean()
-print(mean)'''
+''' Plot MINIMUM VALUE Média por Geração e Desvio Padrão por Geração '''
 
+dfmeanmin = pd.DataFrame(dfmin.mean(axis=1), columns=['Média_por_Geração'])
+dfmin = pd.concat([dfmin, dfmeanmin], axis=1)
+dfstdmin = pd.DataFrame(dfmin.std(axis=1), columns=['Desvio_Padrão_por_Geração'])
+dfmin = pd.concat([dfmin, dfstdmin], axis=1)
 
-# dfmin.plot(subplots=True, figsize=(5, 20), title='Minimum Value')
-# dfavg.plot(subplots=True, figsize=(5, 20), title='Average Value')
-# dfstd.plot(subplots=True, figsize=(5, 20), title='Standart Deviation')
+print(dfmin.to_markdown())
+fig2 = plt.figure()
+x = dfmin.index
+y = dfmin["Média_por_Geração"].tolist()
+yerr = dfmin["Média_por_Geração"].tolist()
+plt.grid()
+plt.errorbar(x, y, yerr=yerr)
+plt.show()
+
+''' Plot AVERAGE VALUE Média por Geração e Desvio Padrão por Geração '''
+
+dfmeanavg = pd.DataFrame(dfavg.mean(axis=1), columns=['Média_por_Geração'])
+dfavg = pd.concat([dfavg, dfmeanavg], axis=1)
+dfstdavg = pd.DataFrame(dfavg.std(axis=1), columns=['Desvio_Padrão_por_Geração'])
+dfavg = pd.concat([dfavg, dfstdavg], axis=1)
+
+print(dfavg.to_markdown())
+fig3 = plt.figure()
+x = dfavg.index
+y = dfavg["Média_por_Geração"].tolist()
+yerr = dfavg["Média_por_Geração"].tolist()
+plt.grid()
+plt.errorbar(x, y, yerr=yerr)
+plt.show()
+
+''' Plot AVERAGE VALUE Média por Geração e Desvio Padrão por Geração '''
+
+dfmeanstd = pd.DataFrame(dfstd.mean(axis=1), columns=['Média_por_Geração'])
+dfstd = pd.concat([dfstd, dfmeanstd], axis=1)
+dfstdstd = pd.DataFrame(dfstd.std(axis=1), columns=['Desvio_Padrão_por_Geração'])
+dfstd = pd.concat([dfstd, dfstdstd], axis=1)
+
+print(dfstd.to_markdown())
+fig4 = plt.figure()
+x = dfstd.index
+y = dfstd["Média_por_Geração"].tolist()
+yerr = dfstd["Média_por_Geração"].tolist()
+plt.grid()
+plt.errorbar(x, y, yerr=yerr)
 plt.show()
 
 '''
@@ -512,52 +555,4 @@ plt.plot(std7 , label='Standart Deviation',  color='gray',     marker='s', marke
 plt.plot(std8 , label='Standart Deviation',  color='gray',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
 plt.plot(std9 , label='Standart Deviation',  color='gold',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
 plt.plot(std10 , label='Standart Deviation',  color='gold',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-'''
-'''
-fig = go.Figure()
-fig.add_trace(go.Scatter(
-        y=df['Vbest'],
-        error_y=dict(
-            type='data',
-            symmetric=True,
-            thickness=DVbest,
-            array=[1 for x in range(0,9)]),
-            name='Best Fitness Solution'))
-fig.update_layout(
-    plot_bgcolor='white',  # Cor de fundo do gráfico
-    paper_bgcolor='white',  # Cor de fundo do papel
-    xaxis=dict(
-        linecolor='rgb(190, 190, 190)',  # Cor da borda do eixo x
-        title_font=dict(size=18),
-        tickfont=dict(size=16)
-    ),
-    yaxis=dict(
-        linecolor='rgb(190, 190, 190)',  # Cor da borda do eixo y
-        title_font=dict(size=18),
-        tickfont=dict(size=16)
-    ),
-)
-fig.update_layout(
-    xaxis=dict(
-        showline=True,  # Exibir borda do eixo x
-        mirror=True,  # Refletir a linha de grade na borda do eixo x
-    ),
-    yaxis=dict(
-        showline=True,  # Exibir borda do eixo y
-        mirror=True,  # Refletir a linha de grade na borda do eixo y
-    ),
-)
-
-fig.update_layout(
-    xaxis=dict(
-        linewidth=2,  # Espessura da borda do eixo x
-    ),
-    yaxis=dict(
-        linewidth=2,  # Espessura da borda do eixo y
-    ),
-)
-fig.update_layout(
-    height=600,  # Altura da figura em pixels
-    width=800,  # Largura da figura em pixels
-)
 '''
