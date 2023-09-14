@@ -498,6 +498,24 @@ print(dfstd)
 
 '''Plots'''
 
+'''Plots RAAN por FITNESS'''
+
+plt.scatter(Inc_1,  Fit_1, marker='.', label='Simulation 1')
+plt.scatter(Inc_2,  Fit_2, marker='.', label='Simulation 2')
+plt.scatter(Inc_3,  Fit_3, marker='.', label='Simulation 3')
+plt.scatter(Inc_4,  Fit_4, marker='.', label='Simulation 4')
+plt.scatter(Inc_5,  Fit_5, marker='.', label='Simulation 5')
+plt.scatter(Inc_6,  Fit_6, marker='.', label='Simulation 6')
+plt.scatter(Inc_7,  Fit_7, marker='.', label='Simulation 7')
+plt.scatter(Inc_8,  Fit_8, marker='.', label='Simulation 8')
+plt.scatter(Inc_9,  Fit_9, marker='.', label='Simulation 9')
+plt.scatter(Inc_10, Fit_10, marker='.', label='Simulation 10')
+plt.title('Inclination x Fitness')
+plt.xlabel('Inclination')
+plt.ylabel('Fitness')
+plt.legend()
+plt.grid()
+plt.show()
 
 ''' Plot BEST SOLUTION Média por Geração e Desvio Padrão por Geração '''
 
