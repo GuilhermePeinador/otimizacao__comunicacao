@@ -487,7 +487,7 @@ plt.rc('axes',   labelsize=SIZE)        # fontsize of the x and y labels
 plt.rc('xtick',  labelsize=SIZE)        # fontsize of the tick labels
 plt.rc('ytick',  labelsize=SIZE)        # fontsize of the tick labels
 plt.rc('legend', fontsize=15)           # legend fontsize
-plt.rc('figure', titlesize=SIZE)
+plt.rc('figure', titlesize=SIZE)        # title fontsize
 plt.rcParams["font.family"] = "arial"
 
 plt.show()
@@ -507,6 +507,8 @@ y = dfbest["Média_por_Geração"].tolist()
 yerr = dfbest["Desvio_Padrão_por_Geração"].tolist()
 plt.grid()
 plt.errorbar(x, y, yerr=yerr)
+plt.xlabel('Generations')
+plt.ylabel('Best Solution Mean')
 plt.show()
 
 '''

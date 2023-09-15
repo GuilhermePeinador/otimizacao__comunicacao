@@ -12,10 +12,27 @@ df7100 = pd.read_csv('2Sats-vsraan/2sat-7100.plot')
 df7100.columns = ['Gen', 'Inc', 'SMA', 'Fitness']
 
 fig = plt.figure()
+plt.figure(figsize=(10, 6))
+
+plt.plot(df6800["Fitness"].tolist(), color='black',     marker='.', label="6800")
+plt.plot(df6900["Fitness"].tolist(), color='red',     marker='.', label="6900")
+plt.plot(df7000["Fitness"].tolist(), color='gold',     marker='.', label="7000")
+plt.plot(df7100["Fitness"].tolist(), color='gray',     marker='.', label="7100")
+
+plt.title('Inclination x Fitness')
+plt.xlabel('Inclination')
+plt.ylabel('Fitness')
+plt.legend(ncol=2, bbox_to_anchor=(0.5, -0.2), loc='upper center')
 plt.grid()
-plt.plot(df6800["Fitness"].tolist(), label="6800")
-plt.plot(df6900["Fitness"].tolist(), label="6900")
-plt.plot(df7000["Fitness"].tolist(), label="7000")
-plt.plot(df7100["Fitness"].tolist(), label="7100")
-plt.legend()
+
+SIZE = 20
+plt.rc('font',   size=SIZE)             # controls default text sizes
+plt.rc('axes',   titlesize=SIZE)        # fontsize of the axes title
+plt.rc('axes',   labelsize=SIZE)        # fontsize of the x and y labels
+plt.rc('xtick',  labelsize=SIZE)        # fontsize of the tick labels
+plt.rc('ytick',  labelsize=SIZE)        # fontsize of the tick labels
+plt.rc('legend', fontsize=15)           # legend fontsize
+plt.rc('figure', titlesize=SIZE)        # title fontsize
+plt.rcParams["font.family"] = "arial"
+
 plt.show()

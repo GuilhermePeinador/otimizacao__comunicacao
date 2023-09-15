@@ -498,26 +498,27 @@ print(dfstd)
 
 '''Plots'''
 
-'''Plots RAAN por FITNESS'''
+# Plots RAAN por FITNESS
 
-plt.scatter(Inc_1,  Fit_1, marker='.', label='Simulation 1')
-plt.scatter(Inc_2,  Fit_2, marker='.', label='Simulation 2')
-plt.scatter(Inc_3,  Fit_3, marker='.', label='Simulation 3')
-plt.scatter(Inc_4,  Fit_4, marker='.', label='Simulation 4')
-plt.scatter(Inc_5,  Fit_5, marker='.', label='Simulation 5')
-plt.scatter(Inc_6,  Fit_6, marker='.', label='Simulation 6')
-plt.scatter(Inc_7,  Fit_7, marker='.', label='Simulation 7')
-plt.scatter(Inc_8,  Fit_8, marker='.', label='Simulation 8')
-plt.scatter(Inc_9,  Fit_9, marker='.', label='Simulation 9')
-plt.scatter(Inc_10, Fit_10, marker='.', label='Simulation 10')
+plt.scatter(Inc_1,  FitTot_1,  marker='.', label='Simulation 1')
+plt.scatter(Inc_2,  FitTot_2,  marker='.', label='Simulation 2')
+plt.scatter(Inc_3,  FitTot_3,  marker='.', label='Simulation 3')
+plt.scatter(Inc_4,  FitTot_4,  marker='.', label='Simulation 4')
+plt.scatter(Inc_5,  FitTot_5,  marker='.', label='Simulation 5')
+plt.scatter(Inc_6,  FitTot_6,  marker='.', label='Simulation 6')
+plt.scatter(Inc_7,  FitTot_7,  marker='.', label='Simulation 7')
+plt.scatter(Inc_8,  FitTot_8,  marker='.', label='Simulation 8')
+plt.scatter(Inc_9,  FitTot_9,  marker='.', label='Simulation 9')
+plt.scatter(Inc_10, FitTot_10, marker='.', label='Simulation 10')
 plt.title('Inclination x Fitness')
 plt.xlabel('Inclination')
 plt.ylabel('Fitness')
-plt.legend()
+plt.legend(ncol=5, bbox_to_anchor=(0.5, -0.2), loc='upper center')
 plt.grid()
 plt.show()
 
-''' Plot BEST SOLUTION Média por Geração e Desvio Padrão por Geração '''
+'''
+# Plot BEST SOLUTION Média por Geração e Desvio Padrão por Geração 
 
 dfmeanbest = pd.DataFrame(dfbest.mean(axis=1), columns=['Média_por_Geração'])
 dfbest = pd.concat([dfbest, dfmeanbest], axis=1)
@@ -533,7 +534,7 @@ plt.grid()
 plt.errorbar(x, y, yerr=yerr)
 plt.show()
 
-''' Plot MINIMUM VALUE Média por Geração e Desvio Padrão por Geração '''
+#  Plot MINIMUM VALUE Média por Geração e Desvio Padrão por Geração 
 
 dfmeanmin = pd.DataFrame(dfmin.mean(axis=1), columns=['Média_por_Geração'])
 dfmin = pd.concat([dfmin, dfmeanmin], axis=1)
@@ -549,7 +550,7 @@ plt.grid()
 plt.errorbar(x, y, yerr=yerr)
 plt.show()
 
-''' Plot AVERAGE VALUE Média por Geração e Desvio Padrão por Geração '''
+# Plot AVERAGE VALUE Média por Geração e Desvio Padrão por Geração 
 
 dfmeanavg = pd.DataFrame(dfavg.mean(axis=1), columns=['Média_por_Geração'])
 dfavg = pd.concat([dfavg, dfmeanavg], axis=1)
@@ -565,7 +566,7 @@ plt.grid()
 plt.errorbar(x, y, yerr=yerr)
 plt.show()
 
-''' Plot STANDART DEVIATION Média por Geração e Desvio Padrão por Geração '''
+# Plot STANDART DEVIATION Média por Geração e Desvio Padrão por Geração 
 
 dfmeanstd = pd.DataFrame(dfstd.mean(axis=1), columns=['Média_por_Geração'])
 dfstd = pd.concat([dfstd, dfmeanstd], axis=1)
@@ -580,4 +581,4 @@ yerr = dfstd["Média_por_Geração"].tolist()
 plt.grid()
 plt.errorbar(x, y, yerr=yerr)
 plt.show()
-
+'''

@@ -434,6 +434,7 @@ plt.scatter(Rsat2_10, FitTot_10, color='gray',      marker='.',  label='Simulati
 plt.title('Raan x Fitness')
 plt.xlabel('Raan')
 plt.ylabel('Fitness')
+plt.legend(ncol=5, bbox_to_anchor=(0.5, -0.2), loc='upper center')
 
 # Plot BEST SOLUTION Média por Geração e Desvio Padrão por Geração
 
@@ -450,9 +451,10 @@ y = dfbest["Média_por_Geração"].tolist()
 yerr = dfbest["Desvio_Padrão_por_Geração"].tolist()
 plt.title('Best Solution x Generations')
 plt.xlabel('Generations')
-plt.ylabel('Best Solution')
+plt.ylabel('Best Solution Mean')
 plt.grid()
 plt.errorbar(x, y, yerr=yerr)
+plt.legend(ncol=1, bbox_to_anchor=(0.5, -0.2), loc='upper center')
 plt.show()
 
 '''
