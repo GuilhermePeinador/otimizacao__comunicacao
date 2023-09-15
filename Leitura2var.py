@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import csv
@@ -24,7 +23,7 @@ with open('2varcaso1/run01.out', 'r') as arquivo_csv:
             Inc_1.append(float(a[3]))
             SMA_1.append(float(a[4]))
             Fit_1.append(float(a[6]))
-        if a[0] =='Generation':
+        if a[0] == 'Generation':
             gen = a
             generation1.append(int(a[2]))
             best1.append(float(a[5]))
@@ -54,7 +53,7 @@ with open('2varcaso1/run02.out', 'r') as arquivo_csv:
             Inc_2.append(float(a[3]))
             SMA_2.append(float(a[4]))
             Fit_2.append(float(a[6]))
-        if a[0] =='Generation':
+        if a[0] == 'Generation':
             gen = a
             generation2.append(int(a[2]))
             best2.append(float(a[5]))
@@ -84,7 +83,7 @@ with open('2varcaso1/run03.out', 'r') as arquivo_csv:
             Inc_3.append(float(a[3]))
             SMA_3.append(float(a[4]))
             Fit_3.append(float(a[6]))
-        if a[0] =='Generation':
+        if a[0] == 'Generation':
             gen = a
             generation3.append(int(a[2]))
             best3.append(float(a[5]))
@@ -144,7 +143,7 @@ with open('2varcaso1/run05.out', 'r') as arquivo_csv:
             Inc_5.append(float(a[3]))
             SMA_5.append(float(a[4]))
             Fit_5.append(float(a[6]))
-        if a[0] =='Generation':
+        if a[0] == 'Generation':
             gen = a
             generation5.append(int(a[2]))
             best5.append(float(a[5]))
@@ -174,7 +173,7 @@ with open('2varcaso1/run06.out', 'r') as arquivo_csv:
             Inc_6.append(float(a[3]))
             SMA_6.append(float(a[4]))
             Fit_6.append(float(a[6]))
-        if a[0] =='Generation':
+        if a[0] == 'Generation':
             gen = a
             generation6.append(int(a[2]))
             best6.append(float(a[5]))
@@ -204,7 +203,7 @@ with open('2varcaso1/run07.out', 'r') as arquivo_csv:
             Inc_7.append(float(a[3]))
             SMA_7.append(float(a[4]))
             Fit_7.append(float(a[6]))
-        if a[0] =='Generation':
+        if a[0] == 'Generation':
             gen = a
             generation7.append(int(a[2]))
             best7.append(float(a[5]))
@@ -234,7 +233,7 @@ with open('2varcaso1/run08.out', 'r') as arquivo_csv:
             Inc_8.append(float(a[3]))
             SMA_8.append(float(a[4]))
             Fit_8.append(float(a[6]))
-        if a[0] =='Generation':
+        if a[0] == 'Generation':
             gen = a
             generation8.append(int(a[2]))
             best8.append(float(a[5]))
@@ -264,7 +263,7 @@ with open('2varcaso1/run09.out', 'r') as arquivo_csv:
             Inc_9.append(float(a[3]))
             SMA_9.append(float(a[4]))
             Fit_9.append(float(a[6]))
-        if a[0] =='Generation':
+        if a[0] == 'Generation':
             gen = a
             generation9.append(int(a[2]))
             best9.append(float(a[5]))
@@ -294,7 +293,7 @@ with open('2varcaso1/run10.out', 'r') as arquivo_csv:
             Inc_10.append(float(a[3]))
             SMA_10.append(float(a[4]))
             Fit_10.append(float(a[6]))
-        if a[0] =='Generation':
+        if a[0] == 'Generation':
             gen = a
             generation10.append(int(a[2]))
             best10.append(float(a[5]))
