@@ -460,20 +460,19 @@ dfFit_10 = pd.DataFrame(Fit_10, columns=['Caso10'])
 dfFit = pd.concat([dfFit, dfFit_10], axis=1)
 
 '''Plots'''
-
+plt.figure(figsize=(10, 6))
 '''Plots RAAN por FITNESS'''
 
+plt.scatter(Inc_1 , Fit_1, color='black',     marker='.',  label='Simulation 1')
+plt.scatter(Inc_2 , Fit_2, color='black',     marker='.',  label='Simulation 2')
+plt.scatter(Inc_3 , Fit_3, color='red',       marker='.',  label='Simulation 3')
+plt.scatter(Inc_5 , Fit_5, color='red',       marker='.',  label='Simulation 5')
+plt.scatter(Inc_6 , Fit_6, color='royalblue', marker='.',  label='Simulation 6')
+plt.scatter(Inc_7 , Fit_7, color='royalblue', marker='.',  label='Simulation 7')
+plt.scatter(Inc_8 , Fit_8, color='gold',      marker='.',  label='Simulation 8')
+plt.scatter(Inc_9 , Fit_9, color='gold',      marker='.',  label='Simulation 9')
+plt.scatter(Inc_10, Fit_10,color='gray',      marker='.',  label='Simulation 10')
 
-plt.scatter(Inc_1, Fit_1, marker='.', label='Simulation 1')
-plt.scatter(Inc_2, Fit_2, marker='.', label='Simulation 2')
-plt.scatter(Inc_3, Fit_3, marker='.', label='Simulation 3')
-# plt.scatter(Inc_4, Fit_4, marker='.')
-plt.scatter(Inc_5, Fit_5, marker='.', label='Simulation 5')
-plt.scatter(Inc_6, Fit_6, marker='.', label='Simulation 6')
-plt.scatter(Inc_7, Fit_7, marker='.', label='Simulation 7')
-plt.scatter(Inc_8, Fit_8, marker='.', label='Simulation 8')
-plt.scatter(Inc_9, Fit_9, marker='.', label='Simulation 9')
-plt.scatter(Inc_10, Fit_10, marker='.', label='Simulation 10')
 plt.title('Inclination x Fitness')
 plt.xlabel('Inclination')
 plt.ylabel('Fitness')
@@ -492,7 +491,7 @@ plt.rc('figure', titlesize=SIZE)
 plt.rcParams["font.family"] = "arial"
 
 plt.show()
-'''
+
 # Plot BEST SOLUTION Média por Geração e Desvio Padrão por Geração 
 
 dfmeanbest = pd.DataFrame(dfbest.mean(axis=1), columns=['Média_por_Geração'])
@@ -502,14 +501,15 @@ dfbest = pd.concat([dfbest, dfstdbest], axis=1)
 
 print(dfbest.to_markdown())
 fig = plt.figure()
+plt.figure(figsize=(10, 6))
 x = dfbest.index
 y = dfbest["Média_por_Geração"].tolist()
 yerr = dfbest["Desvio_Padrão_por_Geração"].tolist()
 plt.grid()
 plt.errorbar(x, y, yerr=yerr)
-plt.xscale('log')
 plt.show()
 
+'''
 # Plot MINIMUM VALUE Média por Geração e Desvio Padrão por Geração
 
 dfmeanmin = pd.DataFrame(dfmin.mean(axis=1), columns=['Média_por_Geração'])

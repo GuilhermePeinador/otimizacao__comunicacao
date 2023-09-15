@@ -419,24 +419,23 @@ dfstd = pd.concat([dfstd, dfstd10], axis=1)
 ''' GRÁFICOS '''
 ''' Plot Scatter Raan x Fitness '''
 
-'''
-plt.scatter(Rsat2_1, FitTot_1, marker='.')
-plt.scatter(Rsat2_2, FitTot_2, marker='.')
-plt.scatter(Rsat2_3, FitTot_3, marker='.')
-plt.scatter(Rsat2_4, FitTot_4, marker='.')
-plt.scatter(Rsat2_5, FitTot_5, marker='.')
-plt.scatter(Rsat2_6, FitTot_6, marker='.')
-plt.scatter(Rsat2_7, FitTot_7, marker='.')
-plt.scatter(Rsat2_8, FitTot_8, marker='.')
-plt.scatter(Rsat2_9, FitTot_9, marker='.')
-plt.scatter(Rsat2_10, FitTot_10, marker='.')
+plt.figure(figsize=(10, 6))
+plt.scatter(Rsat2_1, FitTot_1,   color='black',     marker='.',  label='Simulation 1')
+plt.scatter(Rsat2_2, FitTot_2,   color='black',     marker='.',  label='Simulation 2')
+plt.scatter(Rsat2_3, FitTot_3,   color='red',       marker='.',  label='Simulation 3')
+plt.scatter(Rsat2_4, FitTot_4,   color='red',       marker='.',  label='Simulation 4')
+plt.scatter(Rsat2_5, FitTot_5,   color='royalblue', marker='.',  label='Simulation 5')
+plt.scatter(Rsat2_6, FitTot_6,   color='royalblue', marker='.',  label='Simulation 6')
+plt.scatter(Rsat2_7, FitTot_7,   color='gold',      marker='.',  label='Simulation 7')
+plt.scatter(Rsat2_8, FitTot_8,   color='gold',      marker='.',  label='Simulation 8')
+plt.scatter(Rsat2_9, FitTot_9,   color='gray',      marker='.',  label='Simulation 9')
+plt.scatter(Rsat2_10, FitTot_10, color='gray',      marker='.',  label='Simulation 10')
+
 plt.title('Raan x Fitness')
 plt.xlabel('Raan')
 plt.ylabel('Fitness')
-plt.show()
-'''
 
-''' Plot BEST SOLUTION Média por Geração e Desvio Padrão por Geração '''
+# Plot BEST SOLUTION Média por Geração e Desvio Padrão por Geração
 
 dfmeanbest = pd.DataFrame(dfbest.mean(axis=1), columns=['Média_por_Geração'])
 dfbest = pd.concat([dfbest, dfmeanbest], axis=1)
@@ -445,14 +444,19 @@ dfbest = pd.concat([dfbest, dfstdbest], axis=1)
 
 print(dfbest.to_markdown())
 fig = plt.figure()
+plt.figure(figsize=(10, 6))
 x = dfbest.index
 y = dfbest["Média_por_Geração"].tolist()
 yerr = dfbest["Desvio_Padrão_por_Geração"].tolist()
+plt.title('Best Solution x Generations')
+plt.xlabel('Generations')
+plt.ylabel('Best Solution')
 plt.grid()
 plt.errorbar(x, y, yerr=yerr)
 plt.show()
 
-''' Plot MINIMUM VALUE Média por Geração e Desvio Padrão por Geração '''
+'''
+# Plot MINIMUM VALUE Média por Geração e Desvio Padrão por Geração 
 
 dfmeanmin = pd.DataFrame(dfmin.mean(axis=1), columns=['Média_por_Geração'])
 dfmin = pd.concat([dfmin, dfmeanmin], axis=1)
@@ -468,7 +472,7 @@ plt.grid()
 plt.errorbar(x, y, yerr=yerr)
 plt.show()
 
-''' Plot AVERAGE VALUE Média por Geração e Desvio Padrão por Geração '''
+# Plot AVERAGE VALUE Média por Geração e Desvio Padrão por Geração
 
 dfmeanavg = pd.DataFrame(dfavg.mean(axis=1), columns=['Média_por_Geração'])
 dfavg = pd.concat([dfavg, dfmeanavg], axis=1)
@@ -484,7 +488,7 @@ plt.grid()
 plt.errorbar(x, y, yerr=yerr)
 plt.show()
 
-''' Plot AVERAGE VALUE Média por Geração e Desvio Padrão por Geração '''
+# Plot AVERAGE VALUE Média por Geração e Desvio Padrão por Geração 
 
 dfmeanstd = pd.DataFrame(dfstd.mean(axis=1), columns=['Média_por_Geração'])
 dfstd = pd.concat([dfstd, dfmeanstd], axis=1)
@@ -500,7 +504,7 @@ plt.grid()
 plt.errorbar(x, y, yerr=yerr)
 plt.show()
 
-'''
+
 plt.plot(best1 , label='Best fitness'     ,  color='black',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
 plt.plot(best2 , label='Best fitness'     ,  color='black',     marker='s', markersize='0', linestyle='-.',  linewidth = 2)
 plt.plot(best3 , label='Best fitness'     ,  color='royalblue',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
