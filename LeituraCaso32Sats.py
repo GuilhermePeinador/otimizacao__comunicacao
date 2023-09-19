@@ -419,23 +419,37 @@ dfstd = pd.concat([dfstd, dfstd10], axis=1)
 ''' GRÁFICOS '''
 ''' Plot Scatter Raan x Fitness '''
 
-plt.figure(figsize=(10, 6))
-plt.scatter(Rsat2_1, FitTot_1,   color='black',     marker='.',  label='Simulation 1')
-plt.scatter(Rsat2_2, FitTot_2,   color='black',     marker='.',  label='Simulation 2')
-plt.scatter(Rsat2_3, FitTot_3,   color='red',       marker='.',  label='Simulation 3')
-plt.scatter(Rsat2_4, FitTot_4,   color='red',       marker='.',  label='Simulation 4')
-plt.scatter(Rsat2_5, FitTot_5,   color='royalblue', marker='.',  label='Simulation 5')
-plt.scatter(Rsat2_6, FitTot_6,   color='royalblue', marker='.',  label='Simulation 6')
-plt.scatter(Rsat2_7, FitTot_7,   color='gold',      marker='.',  label='Simulation 7')
-plt.scatter(Rsat2_8, FitTot_8,   color='gold',      marker='.',  label='Simulation 8')
-plt.scatter(Rsat2_9, FitTot_9,   color='gray',      marker='.',  label='Simulation 9')
-plt.scatter(Rsat2_10, FitTot_10, color='gray',      marker='.',  label='Simulation 10')
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.scatter(Rsat2_1, FitTot_1,   color='black',     marker='.',  label='Simulation 1')
+ax.scatter(Rsat2_2, FitTot_2,   color='black',     marker='.',  label='Simulation 2')
+ax.scatter(Rsat2_3, FitTot_3,   color='red',       marker='.',  label='Simulation 3')
+ax.scatter(Rsat2_4, FitTot_4,   color='red',       marker='.',  label='Simulation 4')
+ax.scatter(Rsat2_5, FitTot_5,   color='royalblue', marker='.',  label='Simulation 5')
+ax.scatter(Rsat2_6, FitTot_6,   color='royalblue', marker='.',  label='Simulation 6')
+ax.scatter(Rsat2_7, FitTot_7,   color='gold',      marker='.',  label='Simulation 7')
+ax.scatter(Rsat2_8, FitTot_8,   color='gold',      marker='.',  label='Simulation 8')
+ax.scatter(Rsat2_9, FitTot_9,   color='gray',      marker='.',  label='Simulation 9')
+ax.scatter(Rsat2_10, FitTot_10, color='gray',      marker='.',  label='Simulation 10')
 
-plt.title('Raan x Fitness')
-plt.xlabel('Raan')
-plt.ylabel('Fitness')
-plt.legend(ncol=5, bbox_to_anchor=(0.5, -0.2), loc='upper center')
+ax.set_title('Raan x Fitness')
+ax.set_xlabel('Raan')
+ax.set_ylabel('Fitness')
+ax.legend(loc='lower center', bbox_to_anchor=(0.5, -0.25),
+          ncol=5, fancybox=True, shadow=True)
+plt.tight_layout()
+plt.grid()
 
+SIZE = 20
+plt.rc('font',   size=SIZE)             # controls default text sizes
+plt.rc('axes',   titlesize=SIZE)        # fontsize of the axes title
+plt.rc('axes',   labelsize=SIZE)        # fontsize of the x and y labels
+plt.rc('xtick',  labelsize=SIZE)        # fontsize of the tick labels
+plt.rc('ytick',  labelsize=SIZE)        # fontsize of the tick labels
+plt.rc('legend', fontsize=15)           # legend fontsize
+plt.rc('figure', titlesize=SIZE)        # title fontsize
+plt.rcParams["font.family"] = "arial"
+
+plt.show()
 # Plot BEST SOLUTION Média por Geração e Desvio Padrão por Geração
 
 dfmeanbest = pd.DataFrame(dfbest.mean(axis=1), columns=['Média_por_Geração'])
@@ -444,17 +458,26 @@ dfstdbest = pd.DataFrame(dfbest.std(axis=1), columns=['Desvio_Padrão_por_Geraç
 dfbest = pd.concat([dfbest, dfstdbest], axis=1)
 
 print(dfbest.to_markdown())
-fig = plt.figure()
-plt.figure(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(10, 6))
 x = dfbest.index
 y = dfbest["Média_por_Geração"].tolist()
 yerr = dfbest["Desvio_Padrão_por_Geração"].tolist()
-plt.title('Best Solution x Generations')
-plt.xlabel('Generations')
-plt.ylabel('Best Solution Mean')
-plt.grid()
+ax.set_title('Best Solution x Generations')
+ax.set_xlabel('Generations')
+ax.set_ylabel('Best Solution Mean')
 plt.errorbar(x, y, yerr=yerr)
-plt.legend(ncol=1, bbox_to_anchor=(0.5, -0.2), loc='upper center')
+plt.tight_layout()
+plt.grid()
+
+SIZE = 20
+plt.rc('font',   size=SIZE)             # controls default text sizes
+plt.rc('axes',   titlesize=SIZE)        # fontsize of the axes title
+plt.rc('axes',   labelsize=SIZE)        # fontsize of the x and y labels
+plt.rc('xtick',  labelsize=SIZE)        # fontsize of the tick labels
+plt.rc('ytick',  labelsize=SIZE)        # fontsize of the tick labels
+plt.rc('legend', fontsize=15)           # legend fontsize
+plt.rc('figure', titlesize=SIZE)        # title fontsize
+plt.rcParams["font.family"] = "arial"
 plt.show()
 
 '''

@@ -460,24 +460,27 @@ dfFit_10 = pd.DataFrame(Fit_10, columns=['Caso10'])
 dfFit = pd.concat([dfFit, dfFit_10], axis=1)
 
 '''Plots'''
-plt.figure(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(10, 6))
+
 '''Plots RAAN por FITNESS'''
 
-plt.scatter(Inc_1 , Fit_1, color='black',     marker='.',  label='Simulation 1')
-plt.scatter(Inc_2 , Fit_2, color='black',     marker='.',  label='Simulation 2')
-plt.scatter(Inc_3 , Fit_3, color='red',       marker='.',  label='Simulation 3')
-plt.scatter(Inc_5 , Fit_5, color='red',       marker='.',  label='Simulation 5')
-plt.scatter(Inc_6 , Fit_6, color='royalblue', marker='.',  label='Simulation 6')
-plt.scatter(Inc_7 , Fit_7, color='royalblue', marker='.',  label='Simulation 7')
-plt.scatter(Inc_8 , Fit_8, color='gold',      marker='.',  label='Simulation 8')
-plt.scatter(Inc_9 , Fit_9, color='gold',      marker='.',  label='Simulation 9')
-plt.scatter(Inc_10, Fit_10,color='gray',      marker='.',  label='Simulation 10')
+ax.scatter(Inc_1 , Fit_1, color='black',     marker='.',  label='Simulation 1')
+ax.scatter(Inc_2 , Fit_2, color='black',     marker='.',  label='Simulation 2')
+ax.scatter(Inc_3 , Fit_3, color='red',       marker='.',  label='Simulation 3')
+ax.scatter(Inc_5 , Fit_5, color='red',       marker='.',  label='Simulation 5')
+ax.scatter(Inc_6 , Fit_6, color='royalblue', marker='.',  label='Simulation 6')
+ax.scatter(Inc_7 , Fit_7, color='royalblue', marker='.',  label='Simulation 7')
+ax.scatter(Inc_8 , Fit_8, color='gold',      marker='.',  label='Simulation 8')
+ax.scatter(Inc_9 , Fit_9, color='gold',      marker='.',  label='Simulation 9')
+ax.scatter(Inc_10, Fit_10,color='gray',      marker='.',  label='Simulation 10')
 
-plt.title('Inclination x Fitness')
-plt.xlabel('Inclination')
-plt.ylabel('Fitness')
+ax.set_title('Inclination x Fitness')
+ax.set_xlabel('Inclination')
+ax.set_ylabel('Fitness')
 
-plt.legend(ncol=5, bbox_to_anchor=(0.5, -0.2), loc='upper center')
+plt.legend(loc='lower center', bbox_to_anchor=(0.5, -0.25),
+          ncol=5, fancybox=True, shadow=True)
+plt.tight_layout()
 plt.grid()
 
 SIZE = 20
@@ -500,15 +503,26 @@ dfstdbest = pd.DataFrame(dfbest.std(axis=1), columns=['Desvio_Padrão_por_Geraç
 dfbest = pd.concat([dfbest, dfstdbest], axis=1)
 
 print(dfbest.to_markdown())
-fig = plt.figure()
-plt.figure(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(10, 6))
 x = dfbest.index
 y = dfbest["Média_por_Geração"].tolist()
 yerr = dfbest["Desvio_Padrão_por_Geração"].tolist()
-plt.grid()
 plt.errorbar(x, y, yerr=yerr)
-plt.xlabel('Generations')
-plt.ylabel('Best Solution Mean')
+ax.set_title('Best solution Mean x Generations')
+ax.set_xlabel('Generations')
+ax.set_ylabel('Best Solution Mean')
+plt.tight_layout()
+plt.grid()
+
+SIZE = 20
+plt.rc('font',   size=SIZE)             # controls default text sizes
+plt.rc('axes',   titlesize=SIZE)        # fontsize of the axes title
+plt.rc('axes',   labelsize=SIZE)        # fontsize of the x and y labels
+plt.rc('xtick',  labelsize=SIZE)        # fontsize of the tick labels
+plt.rc('ytick',  labelsize=SIZE)        # fontsize of the tick labels
+plt.rc('legend', fontsize=15)           # legend fontsize
+plt.rc('figure', titlesize=SIZE)        # title fontsize
+plt.rcParams["font.family"] = "arial"
 plt.show()
 
 '''

@@ -500,24 +500,36 @@ print(dfstd)
 
 # Plots RAAN por FITNESS
 
-plt.scatter(Inc_1,  FitTot_1,  marker='.', label='Simulation 1')
-plt.scatter(Inc_2,  FitTot_2,  marker='.', label='Simulation 2')
-plt.scatter(Inc_3,  FitTot_3,  marker='.', label='Simulation 3')
-plt.scatter(Inc_4,  FitTot_4,  marker='.', label='Simulation 4')
-plt.scatter(Inc_5,  FitTot_5,  marker='.', label='Simulation 5')
-plt.scatter(Inc_6,  FitTot_6,  marker='.', label='Simulation 6')
-plt.scatter(Inc_7,  FitTot_7,  marker='.', label='Simulation 7')
-plt.scatter(Inc_8,  FitTot_8,  marker='.', label='Simulation 8')
-plt.scatter(Inc_9,  FitTot_9,  marker='.', label='Simulation 9')
-plt.scatter(Inc_10, FitTot_10, marker='.', label='Simulation 10')
-plt.title('Inclination x Fitness')
-plt.xlabel('Inclination')
-plt.ylabel('Fitness')
-plt.legend(ncol=5, bbox_to_anchor=(0.5, -0.2), loc='upper center')
+fig, ax = plt.subplots(figsize=(10, 6))
+
+ax.scatter(Inc_1,  FitTot_1,  marker='.', label='Simulation 1')
+ax.scatter(Inc_2,  FitTot_2,  marker='.', label='Simulation 2')
+ax.scatter(Inc_3,  FitTot_3,  marker='.', label='Simulation 3')
+ax.scatter(Inc_4,  FitTot_4,  marker='.', label='Simulation 4')
+ax.scatter(Inc_5,  FitTot_5,  marker='.', label='Simulation 5')
+ax.scatter(Inc_6,  FitTot_6,  marker='.', label='Simulation 6')
+ax.scatter(Inc_7,  FitTot_7,  marker='.', label='Simulation 7')
+ax.scatter(Inc_8,  FitTot_8,  marker='.', label='Simulation 8')
+ax.scatter(Inc_9,  FitTot_9,  marker='.', label='Simulation 9')
+ax.scatter(Inc_10, FitTot_10, marker='.', label='Simulation 10')
+ax.set_title('Inclination x Fitness')
+ax.set_xlabel('Inclination')
+ax.set_ylabel('Fitness')
+plt.legend(loc='lower center', bbox_to_anchor=(0.5, -0.25),
+          ncol=5, fancybox=True, shadow=True)
+plt.tight_layout()
 plt.grid()
+SIZE = 20
+plt.rc('font',   size=SIZE)             # controls default text sizes
+plt.rc('axes',   titlesize=SIZE)        # fontsize of the axes title
+plt.rc('axes',   labelsize=SIZE)        # fontsize of the x and y labels
+plt.rc('xtick',  labelsize=SIZE)        # fontsize of the tick labels
+plt.rc('ytick',  labelsize=SIZE)        # fontsize of the tick labels
+plt.rc('legend', fontsize=15)           # legend fontsize
+plt.rc('figure', titlesize=SIZE)        # title fontsize
+plt.rcParams["font.family"] = "arial"
 plt.show()
 
-'''
 # Plot BEST SOLUTION Média por Geração e Desvio Padrão por Geração 
 
 dfmeanbest = pd.DataFrame(dfbest.mean(axis=1), columns=['Média_por_Geração'])
@@ -526,13 +538,28 @@ dfstdbest = pd.DataFrame(dfbest.std(axis=1), columns=['Desvio_Padrão_por_Geraç
 dfbest = pd.concat([dfbest, dfstdbest], axis=1)
 
 print(dfbest.to_markdown())
-fig = plt.figure()
+fig, ax = plt.subplots(figsize=(10, 6))
 x = dfbest.index
 y = dfbest["Média_por_Geração"].tolist()
 yerr = dfbest["Desvio_Padrão_por_Geração"].tolist()
 plt.grid()
 plt.errorbar(x, y, yerr=yerr)
+ax.set_title('Best Solution x Generations')
+ax.set_xlabel('Generations')
+ax.set_ylabel('Best Solution Mean')
+
+SIZE = 20
+plt.rc('font',   size=SIZE)             # controls default text sizes
+plt.rc('axes',   titlesize=SIZE)        # fontsize of the axes title
+plt.rc('axes',   labelsize=SIZE)        # fontsize of the x and y labels
+plt.rc('xtick',  labelsize=SIZE)        # fontsize of the tick labels
+plt.rc('ytick',  labelsize=SIZE)        # fontsize of the tick labels
+plt.rc('legend', fontsize=15)           # legend fontsize
+plt.rc('figure', titlesize=SIZE)        # title fontsize
+plt.rcParams["font.family"] = "arial"
 plt.show()
+
+'''
 
 #  Plot MINIMUM VALUE Média por Geração e Desvio Padrão por Geração 
 
