@@ -91,7 +91,7 @@ with open('2varcaso1/run03.out', 'r') as arquivo_csv:
             min3.append(float(a[11]))
             avg3.append(float(a[14]))
             std3.append((float(a[17])))
-'''
+
 generation4 = []
 best4 = []
 max4 = []
@@ -113,15 +113,15 @@ with open('2varcaso1/run04.out', 'r') as arquivo_csv:
             Inc_4.append(float(a[3]))
             SMA_4.append(float(a[4]))
             Fit_4.append(float(a[6]))
-        if a[0] =='Generation':
+        if a[0] == 'Generation':
             gen = a
             generation4.append(int(a[2]))
-            best4.append(float(a[5]))
-            max4.append(float(a[8]))
-            min4.append(float(a[11]))
-            avg4.append(float(a[14]))
-            std4.append((float(a[17])))
-'''
+            best4.append(float(a[6]))
+            #max4.append(float(a[9]))
+            #min4.append(float(a[12]))
+            #avg4.append(float(a[15]))
+            #std4.append((float(a[18])))
+
 generation5 = []
 best5 = []
 max5 = []
@@ -309,8 +309,8 @@ dfbest2 = pd.DataFrame(best2, columns=['Caso2'])
 dfbest = pd.concat([dfbest, dfbest2], axis=1)
 dfbest3 = pd.DataFrame(best3, columns=['Caso3'])
 dfbest = pd.concat([dfbest, dfbest3], axis=1)
-# dfbest4 = pd.DataFrame(best2, columns=['Caso4'])
-# dfbest = pd.concat([dfbest, dfbest4], axis=1)
+dfbest4 = pd.DataFrame(best2, columns=['Caso4'])
+dfbest = pd.concat([dfbest, dfbest4], axis=1)
 dfbest5 = pd.DataFrame(best2, columns=['Caso5'])
 dfbest = pd.concat([dfbest, dfbest5], axis=1)
 dfbest6 = pd.DataFrame(best2, columns=['Caso6'])
@@ -467,11 +467,12 @@ fig, ax = plt.subplots(figsize=(10, 6))
 ax.scatter(Inc_1 , Fit_1, color='black',     marker='.',  label='Simulation 1')
 ax.scatter(Inc_2 , Fit_2, color='black',     marker='.',  label='Simulation 2')
 ax.scatter(Inc_3 , Fit_3, color='red',       marker='.',  label='Simulation 3')
-ax.scatter(Inc_5 , Fit_5, color='red',       marker='.',  label='Simulation 5')
+ax.scatter(Inc_4 , Fit_4, color='red',       marker='.',  label='Simulation 4')
+ax.scatter(Inc_5 , Fit_5, color='royalblue',       marker='.',  label='Simulation 5')
 ax.scatter(Inc_6 , Fit_6, color='royalblue', marker='.',  label='Simulation 6')
-ax.scatter(Inc_7 , Fit_7, color='royalblue', marker='.',  label='Simulation 7')
+ax.scatter(Inc_7 , Fit_7, color='gold', marker='.',  label='Simulation 7')
 ax.scatter(Inc_8 , Fit_8, color='gold',      marker='.',  label='Simulation 8')
-ax.scatter(Inc_9 , Fit_9, color='gold',      marker='.',  label='Simulation 9')
+ax.scatter(Inc_9 , Fit_9, color='gray',      marker='.',  label='Simulation 9')
 ax.scatter(Inc_10, Fit_10,color='gray',      marker='.',  label='Simulation 10')
 
 ax.set_title('Inclination x Fitness')
