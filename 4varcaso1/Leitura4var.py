@@ -18,7 +18,7 @@ Rsat3_1 = []
 Fitsat1_1 = []
 Fitsat2_1 = []
 Fitsat3_1 = []
-with open('4varcaso1/run01.out', 'r') as arquivo_csv:
+with open('run01.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -58,7 +58,7 @@ Rsat3_2 = []
 Fitsat1_2 = []
 Fitsat2_2 = []
 Fitsat3_2 = []
-with open('4varcaso1/run02.out', 'r') as arquivo_csv:
+with open('run02.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -98,7 +98,7 @@ Rsat3_3 = []
 Fitsat1_3 = []
 Fitsat2_3 = []
 Fitsat3_3 = []
-with open('4varcaso1/run03.out', 'r') as arquivo_csv:
+with open('run03.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -138,7 +138,7 @@ Rsat3_4 = []
 Fitsat1_4 = []
 Fitsat2_4 = []
 Fitsat3_4 = []
-with open('4varcaso1/run04.out', 'r') as arquivo_csv:
+with open('run04.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -178,7 +178,7 @@ Rsat3_5 = []
 Fitsat1_5 = []
 Fitsat2_5 = []
 Fitsat3_5 = []
-with open('4varcaso1/run05.out', 'r') as arquivo_csv:
+with open('run05.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -218,7 +218,7 @@ Rsat3_6 = []
 Fitsat1_6 = []
 Fitsat2_6 = []
 Fitsat3_6 = []
-with open('4varcaso1/run06.out', 'r') as arquivo_csv:
+with open('run06.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -258,7 +258,7 @@ Rsat3_7 = []
 Fitsat1_7 = []
 Fitsat2_7 = []
 Fitsat3_7 = []
-with open('4varcaso1/run07.out', 'r') as arquivo_csv:
+with open('run07.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -298,7 +298,7 @@ Rsat3_8 = []
 Fitsat1_8 = []
 Fitsat2_8 = []
 Fitsat3_8 = []
-with open('4varcaso1/run08.out', 'r') as arquivo_csv:
+with open('run08.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -338,7 +338,7 @@ Rsat3_9 = []
 Fitsat1_9 = []
 Fitsat2_9 = []
 Fitsat3_9 = []
-with open('4varcaso1/run09.out', 'r') as arquivo_csv:
+with open('run09.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -378,7 +378,7 @@ Rsat3_10 = []
 Fitsat1_10 = []
 Fitsat2_10 = []
 Fitsat3_10 = []
-with open('4varcaso1/run10.out', 'r') as arquivo_csv:
+with open('run10.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -495,9 +495,34 @@ dfstd10 = pd.DataFrame(std10, columns=['Caso10'])
 dfstd = pd.concat([dfstd, dfstd10], axis=1)
 print(dfstd)
 
+''' Criando Dataframe FitTot '''
+
+dfFitTot = pd.DataFrame(FitTot_1, columns=['Caso1'])
+dfFitTot2 = pd.DataFrame(FitTot_2, columns=['Caso2'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot2], axis=1)
+dfFitTot3 = pd.DataFrame(FitTot_3, columns=['Caso3'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot3], axis=1)
+dfFitTot4 = pd.DataFrame(FitTot_4, columns=['Caso4'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot4], axis=1)
+dfFitTot5 = pd.DataFrame(FitTot_5, columns=['Caso5'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot5], axis=1)
+dfFitTot6 = pd.DataFrame(FitTot_6, columns=['Caso6'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot6], axis=1)
+dfFitTot7 = pd.DataFrame(FitTot_7, columns=['Caso7'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot7], axis=1)
+dfFitTot8 = pd.DataFrame(FitTot_8, columns=['Caso8'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot8], axis=1)
+dfFitTot9 = pd.DataFrame(FitTot_9, columns=['Caso9'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot9], axis=1)
+dfFitTot10 = pd.DataFrame(FitTot_10, columns=['Caso10'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot10], axis=1)
+
+maxValues = dfFitTot.max()
+
+print(maxValues)
 
 '''Plots'''
-
+'''
 # Plots RAAN por FITNESS
 
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -559,7 +584,6 @@ plt.rc('figure', titlesize=SIZE)        # title fontsize
 plt.rcParams["font.family"] = "arial"
 plt.show()
 
-'''
 
 #  Plot MINIMUM VALUE Média por Geração e Desvio Padrão por Geração 
 

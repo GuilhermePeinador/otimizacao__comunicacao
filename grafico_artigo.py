@@ -27,7 +27,7 @@ polyline98 = np.linspace(75, 525, 19)
 # fig.set_figwidth(15)
 # fig.tight_layout(pad=6.0)
 
-plt.figure(figsize=(10,6))
+fig, ax = plt.subplots(figsize=(10, 6))
 
 # plt.set_title("Parallel Configuration")
 plt.plot(Orbit[:20] ,Frac[:20], color='black',marker='s',markersize='10',linestyle='-',label='30$^{\circ}$',linewidth = 0)
@@ -38,13 +38,13 @@ plt.plot(Orbit[41:] ,Frac[41:],color='royalblue',marker='^',markersize='10',line
 plt.plot(polyline98 ,model98(polyline98), color='royalblue',marker='s',markersize='0',linestyle='--',label='98$^{\circ}$ - fit',linewidth = 2)
 
 
-plt.ylabel('Fraction of Communication [s/s]',  labelpad=20)
-plt.xlim([0,600])
-plt.xticks([0,100,200,300,400,500,600])
-plt.yticks([0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01, 0.011, 0.012])
-plt.ylim([0.0030, 0.0125])
-plt.xlabel('Altitude [km]', labelpad=20)
-plt.legend(bbox_to_anchor=(0.5, -0.20), ncol=3, loc='upper center')
+ax.ylabel('Fraction of Communication [s/s]',  labelpad=20)
+ax.xlim([0,600])
+ax.xticks([0,100,200,300,400,500,600])
+ax.yticks([0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01, 0.011, 0.012])
+ax.ylim([0.0030, 0.0125])
+ax.xlabel('Altitude [km]', labelpad=20)
+ax.legend(bbox_to_anchor=(0.5, -0.20), ncol=3, loc='upper center')
 plt.grid()
 
 SIZE = 20
@@ -56,7 +56,6 @@ plt.rc('ytick', labelsize=SIZE)    # fontsize of the tick labels
 plt.rc('legend', fontsize=15)    # legend fontsize
 plt.rc('figure', titlesize=SIZE)
 plt.rcParams["font.family"] = "arial"
-plt.savefig('FractionCommunication.png', format='png', dpi=300)
 
 plt.show()
 

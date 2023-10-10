@@ -1,8 +1,6 @@
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import csv
-import plotly.express as px
 
 generation1 = []
 best1 = []
@@ -11,11 +9,10 @@ min1 = []
 avg1 = []
 std1 = []
 generationT1 = []
-FitTot_1 = []
-Rsat2_1 = []
-Fitsat1_1 = []
-Fitsat2_1 = []
-with open('2Sats/run01.out', 'r') as arquivo_csv:
+Inc_1 = []
+SMA_1 = []
+Fit_1 = []
+with open('run01.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -23,10 +20,9 @@ with open('2Sats/run01.out', 'r') as arquivo_csv:
         a = linha[0].split()
         if a[0] == 'Gen':
             generationT1.append(float(a[1]))
-            Rsat2_1.append(float(a[5]))
-            FitTot_1.append(float(a[7]))
-            Fitsat1_1.append(float(a[13]))
-            Fitsat2_1.append(float(a[16]))
+            Inc_1.append(float(a[3]))
+            SMA_1.append(float(a[4]))
+            Fit_1.append(float(a[6]))
         if a[0] == 'Generation':
             gen = a
             generation1.append(int(a[2]))
@@ -43,11 +39,10 @@ min2 = []
 avg2 = []
 std2 = []
 generationT2 = []
-FitTot_2 = []
-Rsat2_2 = []
-Fitsat1_2 = []
-Fitsat2_2 = []
-with open('2Sats/run02.out', 'r') as arquivo_csv:
+Inc_2 = []
+SMA_2 = []
+Fit_2 = []
+with open('run02.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -55,10 +50,9 @@ with open('2Sats/run02.out', 'r') as arquivo_csv:
         a = linha[0].split()
         if a[0] == 'Gen':
             generationT2.append(float(a[1]))
-            Rsat2_2.append(float(a[5]))
-            FitTot_2.append(float(a[7]))
-            Fitsat1_2.append(float(a[13]))
-            Fitsat2_2.append(float(a[16]))
+            Inc_2.append(float(a[3]))
+            SMA_2.append(float(a[4]))
+            Fit_2.append(float(a[6]))
         if a[0] == 'Generation':
             gen = a
             generation2.append(int(a[2]))
@@ -75,11 +69,10 @@ min3 = []
 avg3 = []
 std3 = []
 generationT3 = []
-FitTot_3 = []
-Rsat2_3 = []
-Fitsat1_3 = []
-Fitsat2_3 = []
-with open('2Sats/run03.out', 'r') as arquivo_csv:
+Inc_3 = []
+SMA_3 = []
+Fit_3 = []
+with open('run03.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -87,10 +80,9 @@ with open('2Sats/run03.out', 'r') as arquivo_csv:
         a = linha[0].split()
         if a[0] == 'Gen':
             generationT3.append(float(a[1]))
-            Rsat2_3.append(float(a[5]))
-            FitTot_3.append(float(a[7]))
-            Fitsat1_3.append(float(a[13]))
-            Fitsat2_3.append(float(a[16]))
+            Inc_3.append(float(a[3]))
+            SMA_3.append(float(a[4]))
+            Fit_3.append(float(a[6]))
         if a[0] == 'Generation':
             gen = a
             generation3.append(int(a[2]))
@@ -107,11 +99,10 @@ min4 = []
 avg4 = []
 std4 = []
 generationT4 = []
-FitTot_4 = []
-Rsat2_4 = []
-Fitsat1_4 = []
-Fitsat2_4 = []
-with open('2Sats/run04.out', 'r') as arquivo_csv:
+Inc_4 = []
+SMA_4 = []
+Fit_4 = []
+with open('run04.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -119,18 +110,17 @@ with open('2Sats/run04.out', 'r') as arquivo_csv:
         a = linha[0].split()
         if a[0] == 'Gen':
             generationT4.append(float(a[1]))
-            Rsat2_4.append(float(a[5]))
-            FitTot_4.append(float(a[7]))
-            Fitsat1_4.append(float(a[13]))
-            Fitsat2_4.append(float(a[16]))
+            Inc_4.append(float(a[3]))
+            SMA_4.append(float(a[4]))
+            Fit_4.append(float(a[6]))
         if a[0] == 'Generation':
             gen = a
             generation4.append(int(a[2]))
-            best4.append(float(a[5]))
-            max4.append(float(a[8]))
-            min4.append(float(a[11]))
-            avg4.append(float(a[14]))
-            std4.append((float(a[17])))
+            best4.append(float(a[6]))
+            #max4.append(float(a[9]))
+            #min4.append(float(a[12]))
+            #avg4.append(float(a[15]))
+            #std4.append((float(a[18])))
 
 generation5 = []
 best5 = []
@@ -139,11 +129,10 @@ min5 = []
 avg5 = []
 std5 = []
 generationT5 = []
-FitTot_5 = []
-Rsat2_5 = []
-Fitsat1_5 = []
-Fitsat2_5 = []
-with open('2Sats/run05.out', 'r') as arquivo_csv:
+Inc_5 = []
+SMA_5 = []
+Fit_5 = []
+with open('run05.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -151,10 +140,9 @@ with open('2Sats/run05.out', 'r') as arquivo_csv:
         a = linha[0].split()
         if a[0] == 'Gen':
             generationT5.append(float(a[1]))
-            Rsat2_5.append(float(a[5]))
-            FitTot_5.append(float(a[7]))
-            Fitsat1_5.append(float(a[13]))
-            Fitsat2_5.append(float(a[16]))
+            Inc_5.append(float(a[3]))
+            SMA_5.append(float(a[4]))
+            Fit_5.append(float(a[6]))
         if a[0] == 'Generation':
             gen = a
             generation5.append(int(a[2]))
@@ -171,11 +159,10 @@ min6 = []
 avg6 = []
 std6 = []
 generationT6 = []
-FitTot_6 = []
-Rsat2_6 = []
-Fitsat1_6 = []
-Fitsat2_6 = []
-with open('2Sats/run06.out', 'r') as arquivo_csv:
+Inc_6 = []
+SMA_6 = []
+Fit_6 = []
+with open('run06.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -183,10 +170,9 @@ with open('2Sats/run06.out', 'r') as arquivo_csv:
         a = linha[0].split()
         if a[0] == 'Gen':
             generationT6.append(float(a[1]))
-            Rsat2_6.append(float(a[5]))
-            FitTot_6.append(float(a[7]))
-            Fitsat1_6.append(float(a[13]))
-            Fitsat2_6.append(float(a[16]))
+            Inc_6.append(float(a[3]))
+            SMA_6.append(float(a[4]))
+            Fit_6.append(float(a[6]))
         if a[0] == 'Generation':
             gen = a
             generation6.append(int(a[2]))
@@ -203,11 +189,10 @@ min7 = []
 avg7 = []
 std7 = []
 generationT7 = []
-FitTot_7 = []
-Rsat2_7 = []
-Fitsat1_7 = []
-Fitsat2_7 = []
-with open('2Sats/run07.out', 'r') as arquivo_csv:
+Inc_7 = []
+SMA_7 = []
+Fit_7 = []
+with open('run07.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -215,10 +200,9 @@ with open('2Sats/run07.out', 'r') as arquivo_csv:
         a = linha[0].split()
         if a[0] == 'Gen':
             generationT7.append(float(a[1]))
-            Rsat2_7.append(float(a[5]))
-            FitTot_7.append(float(a[7]))
-            Fitsat1_7.append(float(a[13]))
-            Fitsat2_7.append(float(a[16]))
+            Inc_7.append(float(a[3]))
+            SMA_7.append(float(a[4]))
+            Fit_7.append(float(a[6]))
         if a[0] == 'Generation':
             gen = a
             generation7.append(int(a[2]))
@@ -235,11 +219,10 @@ min8 = []
 avg8 = []
 std8 = []
 generationT8 = []
-FitTot_8 = []
-Rsat2_8 = []
-Fitsat1_8 = []
-Fitsat2_8 = []
-with open('2Sats/run08.out', 'r') as arquivo_csv:
+Inc_8 = []
+SMA_8 = []
+Fit_8 = []
+with open('run08.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -247,10 +230,9 @@ with open('2Sats/run08.out', 'r') as arquivo_csv:
         a = linha[0].split()
         if a[0] == 'Gen':
             generationT8.append(float(a[1]))
-            Rsat2_8.append(float(a[5]))
-            FitTot_8.append(float(a[7]))
-            Fitsat1_8.append(float(a[13]))
-            Fitsat2_8.append(float(a[16]))
+            Inc_8.append(float(a[3]))
+            SMA_8.append(float(a[4]))
+            Fit_8.append(float(a[6]))
         if a[0] == 'Generation':
             gen = a
             generation8.append(int(a[2]))
@@ -267,11 +249,10 @@ min9 = []
 avg9 = []
 std9 = []
 generationT9 = []
-FitTot_9 = []
-Rsat2_9 = []
-Fitsat1_9 = []
-Fitsat2_9 = []
-with open('2Sats/run09.out', 'r') as arquivo_csv:
+Inc_9 = []
+SMA_9 = []
+Fit_9 = []
+with open('run09.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -279,10 +260,9 @@ with open('2Sats/run09.out', 'r') as arquivo_csv:
         a = linha[0].split()
         if a[0] == 'Gen':
             generationT9.append(float(a[1]))
-            Rsat2_9.append(float(a[5]))
-            FitTot_9.append(float(a[7]))
-            Fitsat1_9.append(float(a[13]))
-            Fitsat2_9.append(float(a[16]))
+            Inc_9.append(float(a[3]))
+            SMA_9.append(float(a[4]))
+            Fit_9.append(float(a[6]))
         if a[0] == 'Generation':
             gen = a
             generation9.append(int(a[2]))
@@ -299,11 +279,10 @@ min10 = []
 avg10 = []
 std10 = []
 generationT10 = []
-FitTot_10 = []
-Rsat2_10 = []
-Fitsat1_10 = []
-Fitsat2_10 = []
-with open('2Sats/run10.out', 'r') as arquivo_csv:
+Inc_10 = []
+SMA_10 = []
+Fit_10 = []
+with open('run10.out', 'r') as arquivo_csv:
 
     read = csv.reader(arquivo_csv, delimiter="\n")
 
@@ -311,10 +290,9 @@ with open('2Sats/run10.out', 'r') as arquivo_csv:
         a = linha[0].split()
         if a[0] == 'Gen':
             generationT10.append(float(a[1]))
-            Rsat2_10.append(float(a[5]))
-            FitTot_10.append(float(a[7]))
-            Fitsat1_10.append(float(a[13]))
-            Fitsat2_10.append(float(a[16]))
+            Inc_10.append(float(a[3]))
+            SMA_10.append(float(a[4]))
+            Fit_10.append(float(a[6]))
         if a[0] == 'Generation':
             gen = a
             generation10.append(int(a[2]))
@@ -323,7 +301,6 @@ with open('2Sats/run10.out', 'r') as arquivo_csv:
             min10.append(float(a[11]))
             avg10.append(float(a[14]))
             std10.append((float(a[17])))
-
 
 '''Criando DataFrame Best'''
 
@@ -346,6 +323,7 @@ dfbest9 = pd.DataFrame(best2, columns=['Caso9'])
 dfbest = pd.concat([dfbest, dfbest9], axis=1)
 dfbest10 = pd.DataFrame(best2, columns=['Caso10'])
 dfbest = pd.concat([dfbest, dfbest10], axis=1)
+print(dfbest)
 
 '''Criando Dataframe Min'''
 
@@ -354,8 +332,8 @@ dfmin2 = pd.DataFrame(min2, columns=['Caso2'])
 dfmin = pd.concat([dfmin, dfmin2], axis=1)
 dfmin3 = pd.DataFrame(min3, columns=['Caso3'])
 dfmin = pd.concat([dfmin, dfmin3], axis=1)
-dfmin4 = pd.DataFrame(min4, columns=['Caso4'])
-dfmin = pd.concat([dfmin, dfmin4], axis=1)
+# dfmin4 = pd.DataFrame(min4, columns=['Caso4'])
+# dfmin = pd.concat([dfmin, dfmin4], axis=1)
 dfmin5 = pd.DataFrame(min5, columns=['Caso5'])
 dfmin = pd.concat([dfmin, dfmin5], axis=1)
 dfmin6 = pd.DataFrame(min6, columns=['Caso6'])
@@ -377,8 +355,8 @@ dfavg2 = pd.DataFrame(avg2, columns=['Caso2'])
 dfavg = pd.concat([dfavg, dfavg2], axis=1)
 dfavg3 = pd.DataFrame(avg3, columns=['Caso3'])
 dfavg = pd.concat([dfavg, dfavg3], axis=1)
-dfavg4 = pd.DataFrame(avg4, columns=['Caso4'])
-dfavg = pd.concat([dfavg, dfavg4], axis=1)
+# dfavg4 = pd.DataFrame(avg4, columns=['Caso4'])
+# dfavg = pd.concat([dfavg, dfavg4], axis=1)
 dfavg5 = pd.DataFrame(avg5, columns=['Caso5'])
 dfavg = pd.concat([dfavg, dfavg5], axis=1)
 dfavg6 = pd.DataFrame(avg6, columns=['Caso6'])
@@ -400,8 +378,8 @@ dfstd2 = pd.DataFrame(std2, columns=['Caso2'])
 dfstd = pd.concat([dfstd, dfstd2], axis=1)
 dfstd3 = pd.DataFrame(std3, columns=['Caso3'])
 dfstd = pd.concat([dfstd, dfstd3], axis=1)
-dfstd4 = pd.DataFrame(std4, columns=['Caso4'])
-dfstd = pd.concat([dfstd, dfstd4], axis=1)
+# dfstd4 = pd.DataFrame(std4, columns=['Caso4'])
+# dfstd = pd.concat([dfstd, dfstd4], axis=1)
 dfstd5 = pd.DataFrame(std5, columns=['Caso5'])
 dfstd = pd.concat([dfstd, dfstd5], axis=1)
 dfstd6 = pd.DataFrame(std6, columns=['Caso6'])
@@ -415,26 +393,120 @@ dfstd = pd.concat([dfstd, dfstd9], axis=1)
 dfstd10 = pd.DataFrame(std10, columns=['Caso10'])
 dfstd = pd.concat([dfstd, dfstd10], axis=1)
 
+''' DataFrame de Inclinação '''
 
-''' GRÁFICOS '''
-''' Plot Scatter Raan x Fitness '''
+dfInc = pd.DataFrame(Inc_1, columns=['Caso1'])
+dfInc_2 = pd.DataFrame(Inc_2, columns=['Caso2'])
+dfInc = pd.concat([dfInc, dfInc_2], axis=1)
+dfInc_3 = pd.DataFrame(Inc_3, columns=['Caso3'])
+dfInc = pd.concat([dfInc, dfInc_3], axis=1)
+# dfInc_4 = pd.DataFrame(Inc4, columns=['Caso4'])
+# dfInc = pd.concat([dfInc, dfInc4], axis=1)
+dfInc_5 = pd.DataFrame(Inc_5, columns=['Caso5'])
+dfInc = pd.concat([dfInc, dfInc_5], axis=1)
+dfInc_6 = pd.DataFrame(Inc_6, columns=['Caso6'])
+dfInc = pd.concat([dfInc, dfInc_6], axis=1)
+dfInc_7 = pd.DataFrame(Inc_7, columns=['Caso7'])
+dfInc = pd.concat([dfInc, dfInc_7], axis=1)
+dfInc_8 = pd.DataFrame(Inc_8, columns=['Caso8'])
+dfInc = pd.concat([dfInc, dfInc_8], axis=1)
+dfInc_9 = pd.DataFrame(Inc_9, columns=['Caso9'])
+dfInc = pd.concat([dfInc, dfInc_9], axis=1)
+dfInc_10 = pd.DataFrame(Inc_10, columns=['Caso10'])
+dfInc = pd.concat([dfInc, dfInc_10], axis=1)
 
+''' DataFrame de SMA'''
+
+dfSMA = pd.DataFrame(SMA_1, columns=['Caso1'])
+dfSMA_2 = pd.DataFrame(SMA_2, columns=['Caso2'])
+dfSMA = pd.concat([dfSMA, dfSMA_2], axis=1)
+dfSMA_3 = pd.DataFrame(SMA_3, columns=['Caso3'])
+dfSMA = pd.concat([dfSMA, dfSMA_3], axis=1)
+# dfSMA_4 = pd.DataFrame(SMA_4, columns=['Caso4'])
+# dfSMA = pd.concat([dfSMA, dfSMA_4], axis=1)
+dfSMA_5 = pd.DataFrame(SMA_5, columns=['Caso5'])
+dfSMA = pd.concat([dfSMA, dfSMA_5], axis=1)
+dfSMA_6 = pd.DataFrame(SMA_6, columns=['Caso6'])
+dfSMA = pd.concat([dfSMA, dfSMA_6], axis=1)
+dfSMA_7 = pd.DataFrame(SMA_7, columns=['Caso7'])
+dfSMA = pd.concat([dfSMA, dfSMA_7], axis=1)
+dfSMA_8 = pd.DataFrame(SMA_8, columns=['Caso8'])
+dfSMA = pd.concat([dfSMA, dfSMA_8], axis=1)
+dfSMA_9 = pd.DataFrame(SMA_9, columns=['Caso9'])
+dfSMA = pd.concat([dfSMA, dfSMA_9], axis=1)
+dfSMA_10 = pd.DataFrame(SMA_10, columns=['Caso10'])
+dfSMA = pd.concat([dfSMA, dfSMA_10], axis=1)
+
+''' DataFrame de Fitness'''
+
+dfFit = pd.DataFrame(Fit_1, columns=['Caso1'])
+dfFit_2 = pd.DataFrame(Fit_2, columns=['Caso2'])
+dfFit = pd.concat([dfFit, dfFit_2], axis=1)
+dfFit_3 = pd.DataFrame(Fit_3, columns=['Caso3'])
+dfFit = pd.concat([dfFit, dfFit_3], axis=1)
+# dfFit_4 = pd.DataFrame(Fit_4, columns=['Caso4'])
+# dfFit = pd.concat([dfFit, dfFit_4], axis=1)
+dfFit_5 = pd.DataFrame(Fit_5, columns=['Caso5'])
+dfFit = pd.concat([dfFit, dfFit_5], axis=1)
+dfFit_6 = pd.DataFrame(Fit_6, columns=['Caso6'])
+dfFit = pd.concat([dfFit, dfFit_6], axis=1)
+dfFit_7 = pd.DataFrame(Fit_7, columns=['Caso7'])
+dfFit = pd.concat([dfFit, dfFit_7], axis=1)
+dfFit_8 = pd.DataFrame(Fit_8, columns=['Caso8'])
+dfFit = pd.concat([dfFit, dfFit_8], axis=1)
+dfFit_9 = pd.DataFrame(Fit_9, columns=['Caso9'])
+dfFit = pd.concat([dfFit, dfFit_9], axis=1)
+dfFit_10 = pd.DataFrame(Fit_10, columns=['Caso10'])
+dfFit = pd.concat([dfFit, dfFit_10], axis=1)
+
+''' Criando Dataframe FitTot '''
+
+dfFitTot = pd.DataFrame(Fit_1, columns=['Caso1'])
+dfFitTot2 = pd.DataFrame(Fit_2, columns=['Caso2'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot2], axis=1)
+dfFitTot3 = pd.DataFrame(Fit_3, columns=['Caso3'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot3], axis=1)
+dfFitTot4 = pd.DataFrame(Fit_4, columns=['Caso4'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot4], axis=1)
+dfFitTot5 = pd.DataFrame(Fit_5, columns=['Caso5'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot5], axis=1)
+dfFitTot6 = pd.DataFrame(Fit_6, columns=['Caso6'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot6], axis=1)
+dfFitTot7 = pd.DataFrame(Fit_7, columns=['Caso7'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot7], axis=1)
+dfFitTot8 = pd.DataFrame(Fit_8, columns=['Caso8'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot8], axis=1)
+dfFitTot9 = pd.DataFrame(Fit_9, columns=['Caso9'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot9], axis=1)
+dfFitTot10 = pd.DataFrame(Fit_10, columns=['Caso10'])
+dfFitTot = pd.concat([dfFitTot, dfFitTot10], axis=1)
+
+maxValues = dfFitTot.max()
+
+print(maxValues)
+
+'''Plots'''
+'''
 fig, ax = plt.subplots(figsize=(10, 6))
-ax.scatter(Rsat2_1, FitTot_1,   color='black',     marker='.',  label='Simulation 1')
-ax.scatter(Rsat2_2, FitTot_2,   color='black',     marker='.',  label='Simulation 2')
-ax.scatter(Rsat2_3, FitTot_3,   color='red',       marker='.',  label='Simulation 3')
-ax.scatter(Rsat2_4, FitTot_4,   color='red',       marker='.',  label='Simulation 4')
-ax.scatter(Rsat2_5, FitTot_5,   color='royalblue', marker='.',  label='Simulation 5')
-ax.scatter(Rsat2_6, FitTot_6,   color='royalblue', marker='.',  label='Simulation 6')
-ax.scatter(Rsat2_7, FitTot_7,   color='gold',      marker='.',  label='Simulation 7')
-ax.scatter(Rsat2_8, FitTot_8,   color='gold',      marker='.',  label='Simulation 8')
-ax.scatter(Rsat2_9, FitTot_9,   color='gray',      marker='.',  label='Simulation 9')
-ax.scatter(Rsat2_10, FitTot_10, color='gray',      marker='.',  label='Simulation 10')
 
-ax.set_title('Raan x Fitness')
-ax.set_xlabel('Raan')
+# Plots RAAN por FITNESS
+
+ax.scatter(Inc_1 , Fit_1, color='black',     marker='.',  label='Simulation 1')
+ax.scatter(Inc_2 , Fit_2, color='black',     marker='.',  label='Simulation 2')
+ax.scatter(Inc_3 , Fit_3, color='red',       marker='.',  label='Simulation 3')
+ax.scatter(Inc_4 , Fit_4, color='red',       marker='.',  label='Simulation 4')
+ax.scatter(Inc_5 , Fit_5, color='royalblue',       marker='.',  label='Simulation 5')
+ax.scatter(Inc_6 , Fit_6, color='royalblue', marker='.',  label='Simulation 6')
+ax.scatter(Inc_7 , Fit_7, color='gold', marker='.',  label='Simulation 7')
+ax.scatter(Inc_8 , Fit_8, color='gold',      marker='.',  label='Simulation 8')
+ax.scatter(Inc_9 , Fit_9, color='gray',      marker='.',  label='Simulation 9')
+ax.scatter(Inc_10, Fit_10,color='gray',      marker='.',  label='Simulation 10')
+
+ax.set_title('Inclination x Fitness')
+ax.set_xlabel('Inclination')
 ax.set_ylabel('Fitness')
-ax.legend(loc='lower center', bbox_to_anchor=(0.5, -0.25),
+
+plt.legend(loc='lower center', bbox_to_anchor=(0.5, -0.25),
           ncol=5, fancybox=True, shadow=True)
 plt.tight_layout()
 plt.grid()
@@ -450,7 +522,8 @@ plt.rc('figure', titlesize=SIZE)        # title fontsize
 plt.rcParams["font.family"] = "arial"
 
 plt.show()
-# Plot BEST SOLUTION Média por Geração e Desvio Padrão por Geração
+
+# Plot BEST SOLUTION Média por Geração e Desvio Padrão por Geração 
 
 dfmeanbest = pd.DataFrame(dfbest.mean(axis=1), columns=['Média_por_Geração'])
 dfbest = pd.concat([dfbest, dfmeanbest], axis=1)
@@ -462,10 +535,10 @@ fig, ax = plt.subplots(figsize=(10, 6))
 x = dfbest.index
 y = dfbest["Média_por_Geração"].tolist()
 yerr = dfbest["Desvio_Padrão_por_Geração"].tolist()
-ax.set_title('Best Solution x Generations')
+plt.errorbar(x, y, yerr=yerr)
+ax.set_title('Best solution Mean x Generations')
 ax.set_xlabel('Generations')
 ax.set_ylabel('Best Solution Mean')
-plt.errorbar(x, y, yerr=yerr)
 plt.tight_layout()
 plt.grid()
 
@@ -480,8 +553,8 @@ plt.rc('figure', titlesize=SIZE)        # title fontsize
 plt.rcParams["font.family"] = "arial"
 plt.show()
 
-'''
-# Plot MINIMUM VALUE Média por Geração e Desvio Padrão por Geração 
+
+# Plot MINIMUM VALUE Média por Geração e Desvio Padrão por Geração
 
 dfmeanmin = pd.DataFrame(dfmin.mean(axis=1), columns=['Média_por_Geração'])
 dfmin = pd.concat([dfmin, dfmeanmin], axis=1)
@@ -497,7 +570,7 @@ plt.grid()
 plt.errorbar(x, y, yerr=yerr)
 plt.show()
 
-# Plot AVERAGE VALUE Média por Geração e Desvio Padrão por Geração
+# Plot AVERAGE VALUE Média por Geração e Desvio Padrão por Geração 
 
 dfmeanavg = pd.DataFrame(dfavg.mean(axis=1), columns=['Média_por_Geração'])
 dfavg = pd.concat([dfavg, dfmeanavg], axis=1)
@@ -513,7 +586,7 @@ plt.grid()
 plt.errorbar(x, y, yerr=yerr)
 plt.show()
 
-# Plot AVERAGE VALUE Média por Geração e Desvio Padrão por Geração 
+#  Plot STANDART DEVIATION Média por Geração e Desvio Padrão por Geração 
 
 dfmeanstd = pd.DataFrame(dfstd.mean(axis=1), columns=['Média_por_Geração'])
 dfstd = pd.concat([dfstd, dfmeanstd], axis=1)
@@ -528,60 +601,4 @@ yerr = dfstd["Média_por_Geração"].tolist()
 plt.grid()
 plt.errorbar(x, y, yerr=yerr)
 plt.show()
-
-
-plt.plot(best1 , label='Best fitness'     ,  color='black',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(best2 , label='Best fitness'     ,  color='black',     marker='s', markersize='0', linestyle='-.',  linewidth = 2)
-plt.plot(best3 , label='Best fitness'     ,  color='royalblue',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(best4 , label='Best fitness'     ,  color='royalblue',     marker='s', markersize='0', linestyle='-.',  linewidth = 2)
-plt.plot(best5 , label='Best fitness'     ,  color='red',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(best6 , label='Best fitness'     ,  color='red',     marker='s', markersize='0', linestyle='-.',  linewidth = 2)
-plt.plot(best7 , label='Best fitness'     ,  color='gray',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(best8 , label='Best fitness'     ,  color='gray',     marker='s', markersize='0', linestyle='-.',  linewidth = 2)
-plt.plot(best9 , label='Best fitness'     ,  color='gold',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(best10 , label='Best fitness'     ,  color='gold',     marker='s', markersize='0', linestyle='-.',  linewidth = 2)
-
-plt.plot(max1 , label='Max value'         ,  color='black',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(max2 , label='Max value'         ,  color='black',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(max3 , label='Max value'         ,  color='royalblue',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(max4 , label='Max value'         ,  color='royalblue',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(max5 , label='Max value'         ,  color='red',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(max6 , label='Max value'         ,  color='red',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(max7 , label='Max value'         ,  color='gray',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(max8 , label='Max value'         ,  color='gray',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(max9 , label='Max value'         ,  color='gold',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(max10 , label='Max value'         ,  color='gold',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-
-plt.plot(min1 , label='Min value'         ,  color='black',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(min2 , label='Min value'         ,  color='black',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(min3 , label='Min value'         ,  color='royalblue',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(min4 , label='Min value'         ,  color='royalblue',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(min5 , label='Min value'         ,  color='red',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(min6 , label='Min value'         ,  color='red',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(min7 , label='Min value'         ,  color='gray',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(min8 , label='Min value'         ,  color='gray',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(min9 , label='Min value'         ,  color='gold',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(min10, label='Min value'         ,  color='gold',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-
-plt.plot(avg1 , label='Average value'     ,  color='black',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(avg2 , label='Average value'     ,  color='black',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(avg3 , label='Average value'     ,  color='royalblue',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(avg4 , label='Average value'     ,  color='royalblue',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(avg5 , label='Average value'     ,  color='red',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(avg6 , label='Average value'     ,  color='red',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(avg7 , label='Average value'     ,  color='gray',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(avg8 , label='Average value'     ,  color='gray',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(avg9 , label='Average value'     ,  color='gold',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(avg10, label='Average value'     ,  color='gold',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-
-plt.plot(std1 , label='Standart Deviation',  color='black',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(std2 , label='Standart Deviation',  color='black',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(std3 , label='Standart Deviation',  color='royalblue',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(std4 , label='Standart Deviation',  color='royalblue',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(std5 , label='Standart Deviation',  color='red',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(std6 , label='Standart Deviation',  color='red',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(std7 , label='Standart Deviation',  color='gray',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(std8 , label='Standart Deviation',  color='gray',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(std9 , label='Standart Deviation',  color='gold',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
-plt.plot(std10 , label='Standart Deviation',  color='gold',     marker='s', markersize='0', linestyle='--',  linewidth = 2)
 '''

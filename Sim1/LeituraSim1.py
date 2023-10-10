@@ -7,38 +7,38 @@ def resource_path(relative_path):
     try:
         base_path = sys._MEIPASS
     except Exception:
-        base_path = os.path.abspath(".")
+        base_path = os.path.abspath("..")
     return os.path.join(base_path, relative_path)
 
 
-df1 = pd.read_csv(resource_path("Sim1/posproc.run01.out"), sep=',', engine='python', on_bad_lines='skip')
+df1 = pd.read_csv(resource_path("posproc.run01.out"), sep=',', engine='python', on_bad_lines='skip')
 Fitness1 = df1.iloc[:, 1]
 
-df2 = pd.read_csv(resource_path("Sim1/posproc.run02.out"), sep=',', engine='python', on_bad_lines='skip')
+df2 = pd.read_csv(resource_path("posproc.run02.out"), sep=',', engine='python', on_bad_lines='skip')
 Fitness2 = df2.iloc[:, 1]
 
-df3 = pd.read_csv(resource_path("Sim1/posproc.run03.out"), sep=',', engine='python', on_bad_lines='skip')
+df3 = pd.read_csv(resource_path("posproc.run03.out"), sep=',', engine='python', on_bad_lines='skip')
 Fitness3 = df3.iloc[:, 1]
 
-df4 = pd.read_csv(resource_path("Sim1/posproc.run04.out"), sep=',', engine='python', on_bad_lines='skip')
+df4 = pd.read_csv(resource_path("posproc.run04.out"), sep=',', engine='python', on_bad_lines='skip')
 Fitness4 = df4.iloc[:, 1]
 
-df5 = pd.read_csv(resource_path("Sim1/posproc.run05.out"), sep=',', engine='python', on_bad_lines='skip')
+df5 = pd.read_csv(resource_path("posproc.run05.out"), sep=',', engine='python', on_bad_lines='skip')
 Fitness5 = df5.iloc[:, 1]
 
-df6 = pd.read_csv(resource_path("Sim1/posproc.run06.out"), sep=',', engine='python', on_bad_lines='skip')
+df6 = pd.read_csv(resource_path("posproc.run06.out"), sep=',', engine='python', on_bad_lines='skip')
 Fitness6 = df6.iloc[:, 1]
 
-df7 = pd.read_csv(resource_path("Sim1/posproc.run07.out"), sep=',', engine='python', on_bad_lines='skip')
+df7 = pd.read_csv(resource_path("posproc.run07.out"), sep=',', engine='python', on_bad_lines='skip')
 Fitness7 = df7.iloc[:, 1]
 
-df8 = pd.read_csv(resource_path("Sim1/posproc.run08.out"), sep=',', engine='python', on_bad_lines='skip')
+df8 = pd.read_csv(resource_path("posproc.run08.out"), sep=',', engine='python', on_bad_lines='skip')
 Fitness8 = df8.iloc[:, 1]
 
-df9 = pd.read_csv(resource_path("Sim1/posproc.run09.out"), sep=',', engine='python', on_bad_lines='skip')
+df9 = pd.read_csv(resource_path("posproc.run09.out"), sep=',', engine='python', on_bad_lines='skip')
 Fitness9 = df9.iloc[:, 1]
 
-df10 = pd.read_csv(resource_path("Sim1/posproc.run10.out"), sep=',', engine='python', on_bad_lines='skip')
+df10 = pd.read_csv(resource_path("posproc.run10.out"), sep=',', engine='python', on_bad_lines='skip')
 Fitness10 = df10.iloc[:, 1]
 
 '''Plots'''
