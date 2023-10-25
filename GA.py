@@ -28,7 +28,7 @@ def fitness_func(ga_instance, solution, solution_idx):
 
     input_string = ' 11/10/2022 18:00:00'
     data = datetime.strptime(input_string, " %m/%d/%Y %H:%M:%S")
-    df = propagador_orbital(data, alt, 0.002, 0, 0.0, 0.0, 30, 50, dt, 3.0, 0.1, 0.1, 0.2)  # (data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira,
+    df = propagador_orbital(data, alt, 0.002, 0, 0.0, 0.0, 30, 10, dt, 3.0, 0.1, 0.1, 0.2)  # (data, semi_eixo, excentricidade, Raan, argumento_perigeu, anomalia_verdadeira,
                                     # inclinacao, num_orbitas, delt, massa, largura, comprimento, altura)
 
     from comunicacao import calculacomunicacao

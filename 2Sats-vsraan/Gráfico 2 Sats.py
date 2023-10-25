@@ -12,8 +12,7 @@ df7100 = pd.read_csv('2sat-7100.plot')
 df7100.columns = ['Gen', 'Inc', 'SMA', 'Fitness']
 
 fig, ax = plt.subplots(figsize=(10, 6))
-# plt.figure()
-plt.rcParams['figure.figsize'] = [4, 3]
+# plt.rcParams['figure.figsize'] = [4, 3]
 ax.plot(df6800["Fitness"].tolist(), color='black',   marker='.', label="6800 km")
 ax.plot(df6900["Fitness"].tolist(), color='red',     marker='.', label="6900 km")
 ax.plot(df7000["Fitness"].tolist(), color='gold',    marker='.', label="7000 km")
@@ -36,5 +35,8 @@ plt.rc('ytick',  labelsize=SIZE)        # fontsize of the tick labels
 plt.rc('legend', fontsize=15)           # legend fontsize
 plt.rc('figure', titlesize=SIZE)        # title fontsize
 plt.rcParams["font.family"] = "arial"
+ax.title.set_size(15)
+ax.xaxis.label.set_size(15)
+ax.yaxis.label.set_size(15)
 
 plt.show()

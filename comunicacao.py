@@ -32,6 +32,38 @@ df = pd.read_csv(resource_path("results\ECEF_R.csv"), sep=',', engine='python', 
 #df=dataframe
 
 #todo def
+
+def calculacomunicacao(df, lat_gs, long_gs):
+    """
+
+    :param df = DataFrame de rx, ry e rz do CubeSat
+    :param lat_gs = Latitude da Groundd Station em Graus (Norte)
+    :param long_gs = Longitude da Groundd Station em Graus (Leste)
+
+    """
+    for i in range(df[df.columns[0]].count()):
+
+        R_E = 6371.00  # raio da Terra em km
+
+        VetorTerraEstacao = np.array([R_E * np.cos(lat_gs) * np.cos(long_gs), R_E * np.cos(lat_gs) * np.sin(long_gs), R_E * np.sin(lat_gs)])
+
+        VetorSatelite = np.array([df.iloc[i, df.columns.get_loc('rx')], df.iloc[i, df.columns.get_loc('ry')], df.iloc[i, df.columns.get_loc('rz')]])
+
+        VetorSateliteEstacao = VetorSatelite - VetorTerraEstacao
+
+        # Critério de Comunicação
+        AComunicacao = np.pi \
+                       - np.arccos((np.dot(VetorSatelite, VetorSateliteEstacao)) / (np.linalg.norm(VetorSatelite) * np.linalg.norm(VetorSateliteEstacao))) \
+                       - np.arccos((np.dot(VetorTerraEstacao, VetorSatelite)) / (np.linalg.norm(VetorTerraEstacao) * np.linalg.norm(VetorSatelite)))
+
+        df6 = pd.DataFrame(AComunicacao, columns=['Ângulo de Comunicação'])
+        df = pd.concat([df, df6], axis=1)
+        df["end"] = None
+        df.to_csv("Tempo de comunicação.csv", sep=',')
+        print (df)
+        return df
+
+'''
 def calculacomunicacao(df):
     Contato = []
     for i in range (df[df.columns[0]].count()):
@@ -63,3 +95,4 @@ def calculacomunicacao(df):
     df.to_csv("Tempo de comunicação.csv", sep=',')
     #print (df)
     return df
+'''
